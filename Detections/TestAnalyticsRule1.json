@@ -15,7 +15,8 @@
             "apiVersion": "2021-09-01-preview",
             "properties": {
                 "enabled": true,
-                "alertRuleTemplateName": "f71aba3d-28fb-450b-b192-4e76a83015c8"
+                "alertRuleTemplateName": "f71aba3d-28fb-450b-b192-4e76a83015c8", 
+                "etag":"*"
             }
         }
     ]
