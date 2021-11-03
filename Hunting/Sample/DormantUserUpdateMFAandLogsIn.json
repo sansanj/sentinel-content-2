@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This querys look for users accounts that have not been successfully logged into recently, who then have a MFA method added or updated before logging in.\nThreat actors may look to re-activate dormant accounts and use them for access by adding MFA methods in the hope that changes to such dormant accounts may go un-noticed."
+            "value": "This querys look for users accounts that have not been successfully logged into recently, who then have a MFA method added or updated before logging in.\nThreat actors may look to re-activate dormant accounts and use them for access by addin"
           },
           {
             "name": "tactics",

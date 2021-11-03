@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Shows volume of documents uploaded to or downloaded from Sharepoint by new IP addresses.\nIn stable environments such connections by new IPs may be unauthorized, especially if associated with\nspikes in volume which could be associated with large-scale document exfiltration."
+            "value": "Shows volume of documents uploaded to or downloaded from Sharepoint by new IP addresses.\nIn stable environments such connections by new IPs may be unauthorized, especially if associated with\nspikes in volume which could be associated with l"
           },
           {
             "name": "tactics",

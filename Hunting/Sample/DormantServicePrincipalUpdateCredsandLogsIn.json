@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query look for Service Principal accounts that are no longer used where a user has added or updated credentials for them before logging in with the Service Principal.\n Threat actors may look to re-activate dormant accounts and use them for access in the hope that changes to such dormant accounts may go un-noticed."
+            "value": "This query look for Service Principal accounts that are no longer used where a user has added or updated credentials for them before logging in with the Service Principal.\n Threat actors may look to re-activate dormant accounts and use them"
           },
           {
             "name": "tactics",

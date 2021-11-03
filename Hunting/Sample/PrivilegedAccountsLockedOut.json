@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies privileged accounts that have been locked out. Verify these lockout are due to legitimate user activity and not due to threat actors attempting to access the accounts.\nRef : https://docs.microsoft.comazure/active-directory/fundamentals/security-operations-privileged-accounts#things-to-monitor"
+            "value": "Identifies privileged accounts that have been locked out. Verify these lockout are due to legitimate user activity and not due to threat actors attempting to access the accounts.\nRef : https://docs.microsoft.comazure/active-directory/fundam"
           },
           {
             "name": "tactics",

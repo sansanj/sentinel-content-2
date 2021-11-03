@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This will identify rare domain accounts accessing or attempting to access cloud resources by examining the AuditLogs, OfficeActivity and SigninLogs\nRare does not mean malicious, but it may be something you would be interested in investigating further\nAdditionally, it is possible that there may be many domains if you have allowed access by 3rd party domain accounts.\nLower the domainLimit value as needed.  For example, if you only want to see domains that have an access attempt count of 2 or less,\nthen set domainLimit = 2 below.  If you need to set it lower only for a given log, then use customLimit in the same way and uncomment \nthat line in the script."
+            "value": "This will identify rare domain accounts accessing or attempting to access cloud resources by examining the AuditLogs, OfficeActivity and SigninLogs\nRare does not mean malicious, but it may be something you would be interested in investigati"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Look for accounts that have a been recorded as disabled by AD in the previous time period but are still using the proxy during\nthe current time period. This query presumes the default squid log format is being used. http://www.squid-cache.org/Doc/config/access_log/"
+            "value": "Look for accounts that have a been recorded as disabled by AD in the previous time period but are still using the proxy during\nthe current time period. This query presumes the default squid log format is being used. http://www.squid-cache.o"
           },
           {
             "name": "tactics",

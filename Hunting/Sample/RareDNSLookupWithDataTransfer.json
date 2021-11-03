@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query is designed to help identify rare DNS connections and resulting data transfer to/from the associated domain.\nThis can help identify unexpected large data transfers to or from internal systems which may indicate data exfil or malicious tool download.\nFeel free to add additional data sources to connect DNS results too various network data that has byte transfer information included."
+            "value": "This query is designed to help identify rare DNS connections and resulting data transfer to/from the associated domain.\nThis can help identify unexpected large data transfers to or from internal systems which may indicate data exfil or mali"
           },
           {
             "name": "tactics",

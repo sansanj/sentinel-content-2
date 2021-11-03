@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This will help you determine if mailbox access observed with Admin/Delegate Logontype. \nThe logon type indicates mailbox accessed from non-owner user. Exchange allows Admin \nand delegate permissions to access other user's inbox.\nIf your organization has valid admin, delegate access given to users, you can whitelist those and investigate other results.\nReferences: https://docs.microsoft.com/office/office-365-management-api/office-365-management-activity-api-schema#logontype"
+            "value": "This will help you determine if mailbox access observed with Admin/Delegate Logontype. \nThe logon type indicates mailbox accessed from non-owner user. Exchange allows Admin \nand delegate permissions to access other user's inbox.\nIf your org"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "his query will show rare firewall rule changes using netsh utility by comparing rule names and program names from the previous day\nwith those from the historical chosen time frame.\n- This technique was seen in relation to Solarigate attack but the results can indicate potential  malicious activity used in different attacks.\n- The process name in each data source is commented out as an adversary could rename it. It is advisable to keep process name commented but\n  if the results show unrelated false positives, users may want to uncomment it.\n- Note also that the queries use the KQL \"has_all\" operator, which hasn't yet been documented officially, but will be soon.\n  In short, \"has_all\" will only match when the referenced field has all strings in the list.\nRefer to netsh syntax: https://docs.microsoft.com/windows-server/administration/windows-commands/netsh\nRefer to our M365 blog for details on use during the Solorigate attack:\nhttps://www.microsoft.com/security/blog/2021/01/20/deep-dive-into-the-solorigate-second-stage-activation-from-sunburst-to-teardrop-and-raindrop"
+            "value": "his query will show rare firewall rule changes using netsh utility by comparing rule names and program names from the previous day\nwith those from the historical chosen time frame.\n- This technique was seen in relation to Solarigate attack "
           },
           {
             "name": "tactics",

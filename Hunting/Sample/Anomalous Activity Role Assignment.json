@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may circumvent mechanisms designed to control elevate privileges to gain higher-level permissions. The query below generates an output \nof all users performing an \"action\" operation regarding a access elevation, where one or more features of the activitiy deviates from the user, \nhis peers or the tenant profile."
+            "value": "Adversaries may circumvent mechanisms designed to control elevate privileges to gain higher-level permissions. The query below generates an output \nof all users performing an \"action\" operation regarding a access elevation, where one or mor"
           },
           {
             "name": "tactics",

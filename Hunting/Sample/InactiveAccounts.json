@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Query for accounts seen signing in for the first time - these could be associated\nwith stale/inactive accounts that ought to have been deleted but were not - and have\nsubseuqently been compromised.\nResults for user accounts created in the last 7 days are filtered out"
+            "value": "Query for accounts seen signing in for the first time - these could be associated\nwith stale/inactive accounts that ought to have been deleted but were not - and have\nsubseuqently been compromised.\nResults for user accounts created in the l"
           },
           {
             "name": "tactics",

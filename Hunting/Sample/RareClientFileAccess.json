@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This will look for connections to files on the server that are requested by only a single client. \nThis analytic will be effective where an actor is utilising relatively static operational IP addresses. The threshold can be modified. \nThe larger the execution window for this query the more reliable the results returned."
+            "value": "This will look for connections to files on the server that are requested by only a single client. \nThis analytic will be effective where an actor is utilising relatively static operational IP addresses. The threshold can be modified. \nThe l"
           },
           {
             "name": "tactics",

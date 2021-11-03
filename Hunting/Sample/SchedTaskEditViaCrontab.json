@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query shows when users have edited or replaced the scheduled tasks using crontab. The events are bucketed into 10 minute intervals \nand all the actions that a particular used took are collected into the List of Actions. Default query is for seven days."
+            "value": "This query shows when users have edited or replaced the scheduled tasks using crontab. The events are bucketed into 10 minute intervals \nand all the actions that a particular used took are collected into the List of Actions. Default query i"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This hunting query identifies updates to the RequiredResourceAccess property of an OAuth application.\nThis property specifies resources that an application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources.\nThis pre-configuration of required resource access drives the consent experience. The resourceAccess property of the requiredResourceAccess type is a collection of ResourceAccess.\nA threat actor might update this property before granting permissions to an application.\n"
+            "value": "This hunting query identifies updates to the RequiredResourceAccess property of an OAuth application.\nThis property specifies resources that an application requires access to and the set of OAuth permission scopes and application roles that"
           },
           {
             "name": "tactics",

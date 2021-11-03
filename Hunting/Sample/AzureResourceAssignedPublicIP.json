@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies when public IP addresses are assigned to Azure Resources.  Additionally, shows connections to those resources.\nResources: \nhttps://docs.microsoft.com/azure/azure-monitor/insights/azure-networking-analytics\nhttps://docs.microsoft.com/azure/network-watcher/traffic-analytics-schema"
+            "value": "Identifies when public IP addresses are assigned to Azure Resources.  Additionally, shows connections to those resources.\nResources: \nhttps://docs.microsoft.com/azure/azure-monitor/insights/azure-networking-analytics\nhttps://docs.microsoft."
           },
           {
             "name": "tactics",

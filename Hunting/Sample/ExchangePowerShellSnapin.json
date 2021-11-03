@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "The Exchange Powershell Snapin was loaded on a host, this allows for a Exchange server management via PowerShell. Whilst this is a legitimate administrative tool it is abused by attackers to performs actions on a compromised Exchange server. Hunt for unusual activity related to this Snapin including it being added on new hosts or by new accounts."
+            "value": "The Exchange Powershell Snapin was loaded on a host, this allows for a Exchange server management via PowerShell. Whilst this is a legitimate administrative tool it is abused by attackers to performs actions on a compromised Exchange server"
           },
           {
             "name": "tactics",

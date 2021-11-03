@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Listing of storage keys is an interesting operation in Azure which might expose additional \nsecrets and PII to callers as well as granting access to VMs. While there are many benign operations of this\ntype, it would be interesting to see if the account performing this activity or the source IP address from \nwhich it is being done is anomalous. \nThe query below generates known clusters of ip address per caller, notice that users which only had single\noperations do not appear in this list as we cannot learn from it their normal activity (only based on a single\nevent). The activities for listing storage account keys is correlated with this learned \nclusters of expected activities and activity which is not expected is returned."
+            "value": "Listing of storage keys is an interesting operation in Azure which might expose additional \nsecrets and PII to callers as well as granting access to VMs. While there are many benign operations of this\ntype, it would be interesting to see if"
           },
           {
             "name": "tactics",

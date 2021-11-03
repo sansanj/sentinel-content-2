@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This alerts when the same client IP (cIP) is connecting with more than 1 but less than 15 different useragent string (csUserAgent) in less than 1 hour.\nWe limit to 50 or less connections to avoid high traffic sites. This may indicate malicious activity as this is a method of probing an environment\nReferences: Status code mappings for your convenience\nIIS status code mapping - https://support.microsoft.com/help/943891/the-http-status-code-in-iis-7-0-iis-7-5-and-iis-8-0\nWin32 Status code mapping - https://msdn.microsoft.com/library/cc231199.aspx"
+            "value": "This alerts when the same client IP (cIP) is connecting with more than 1 but less than 15 different useragent string (csUserAgent) in less than 1 hour.\nWe limit to 50 or less connections to avoid high traffic sites. This may indicate malici"
           },
           {
             "name": "tactics",

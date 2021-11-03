@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This hunting query will try to identify instances where a file us uploaded to file storage and then deleted\nwithin a given threshold. By default the query will find instances where a file is uploaded and deleted within\n5 minutes. This hunting query will help detect automated exfiltration."
+            "value": "This hunting query will try to identify instances where a file us uploaded to file storage and then deleted\nwithin a given threshold. By default the query will find instances where a file is uploaded and deleted within\n5 minutes. This hunti"
           },
           {
             "name": "tactics",

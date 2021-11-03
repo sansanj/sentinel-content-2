@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "dentity and Access Management (IAM) securely manages access to AWS services and resources. \nThis query looks for when an API call is made to change an IAM, particularly those related to new policies being \nattached to users and roles, as well as changes to access methods and changes to account level policies. \nIf these turn out to be noisy filter out the most common for your environment. "
+            "value": "dentity and Access Management (IAM) securely manages access to AWS services and resources. \nThis query looks for when an API call is made to change an IAM, particularly those related to new policies being \nattached to users and roles, as we"
           },
           {
             "name": "tactics",

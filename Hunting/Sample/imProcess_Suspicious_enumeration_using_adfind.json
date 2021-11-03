@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "ttackers can use Adfind which is administrative tool to gather information about Domain controllers, ADFS Servers. They may also rename executables with other benign tools on the system.\nBelow query will look for adfind usage in commandline arguments irrespective of executable name in short span of time. You can limit query this to your DC and ADFS servers.\nBelow references talk about suspicious use of adfind by adversaries.\n- https://thedfirreport.com/2020/05/08/adfind-recon/\n- https://www.fireeye.com/blog/threat-research/2020/05/tactics-techniques-procedures-associated-with-maze-ransomware-incidents.html\n- https://www.microsoft.com/security/blog/2020/12/18/analyzing-solorigate-the-compromised-dll-file-that-started-a-sophisticated-cyberattack-and-how-microsoft-defender-helps-protect"
+            "value": "ttackers can use Adfind which is administrative tool to gather information about Domain controllers, ADFS Servers. They may also rename executables with other benign tools on the system.\nBelow query will look for adfind usage in commandline"
           },
           {
             "name": "tactics",

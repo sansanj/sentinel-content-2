@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Releases in Azure Pipelines often require a user authorization to perform the release. An attacker that has compromised a build may look to self-approve a release using a compromised account to avoid user focus on that release. This query looks for release approvers in pipelines where they have not approved a release in the last 30 days. This query can have a significant false positive rate so its best suited as a hunting query rather than a detection."
+            "value": "Releases in Azure Pipelines often require a user authorization to perform the release. An attacker that has compromised a build may look to self-approve a release using a compromised account to avoid user focus on that release. This query l"
           },
           {
             "name": "tactics",

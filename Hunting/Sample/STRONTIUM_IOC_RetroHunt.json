@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Matches domain name IOCs related to Strontium group activity with CommonSecurityLog and SecurityAlert dataTypes.\nThe query is scoped in the time window that these IOCs were active.\nReferences: https://blogs.microsoft.com/on-the-issues/2019/07/17/new-cyberthreats-require-new-ways-to-protect-democracy."
+            "value": "Matches domain name IOCs related to Strontium group activity with CommonSecurityLog and SecurityAlert dataTypes.\nThe query is scoped in the time window that these IOCs were active.\nReferences: https://blogs.microsoft.com/on-the-issues/2019/"
           },
           {
             "name": "tactics",

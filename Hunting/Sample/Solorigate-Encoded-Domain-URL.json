@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Looks for a logon domain seen in Azure AD logs appearing in a DNS query encoded with the DGA encoding used in the Solorigate incident.\nReference: https://blogs.microsoft.com/on-the-issues/2020/12/13/customers-protect-nation-state-cyberattacks/"
+            "value": "Looks for a logon domain seen in Azure AD logs appearing in a DNS query encoded with the DGA encoding used in the Solorigate incident.\nReference: https://blogs.microsoft.com/on-the-issues/2020/12/13/customers-protect-nation-state-cyberattac"
           },
           {
             "name": "tactics",

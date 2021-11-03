@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may access data objects from cloud storage.  The query below generates an output of all users performing a \"read\" operation regarding data or files, where one or more features of the activitiy deviates from the user, his peers or the tenant profile."
+            "value": "Adversaries may access data objects from cloud storage.  The query below generates an output of all users performing a \"read\" operation regarding data or files, where one or more features of the activitiy deviates from the user, his peers o"
           },
           {
             "name": "tactics",

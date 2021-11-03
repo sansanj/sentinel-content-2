@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "User account failed to logon in current period (default last 1 day). Excludes Windows Sign in attempts due to noise and limits to only more than 10 failed logons or 3 different IPs used.\nAdditionally, Azure Audit Log data from the last several days(default 7 days) related to the given UserPrincipalName will be joined if available.\nThis can help to understand any events for this same user related to User or Group Management.\nResults may indicate a potential malicious use of an account that is rarely used. It is possible this is an account that is new or newly enabled.\nThe associated Azure Audit data should help determine any recent changes to this account and may help you understand why the logons are failing.\nReceiving no results indicates that there were no less than 10 failed logons or that the Auditlogs related to this UserPrincipalName in the default 7 days."
+            "value": "User account failed to logon in current period (default last 1 day). Excludes Windows Sign in attempts due to noise and limits to only more than 10 failed logons or 3 different IPs used.\nAdditionally, Azure Audit Log data from the last seve"
           },
           {
             "name": "tactics",

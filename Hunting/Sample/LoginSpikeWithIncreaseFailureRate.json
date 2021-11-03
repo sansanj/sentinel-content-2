@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query over SiginLogs will summarise the total number of login attempts for each hour of the day on week days, this can be edited.\nThe query then uses Kusto anomaly detection to find login spikes for each hour across all days. The query will then calculate the\npercentage change between the anomalous period and the average logins for that period. Finally the query will determine the success\nand failure rate for logins for the given 1 hour period, if a specified % change in logins is detected alongside a specified failure rate\na result is presented."
+            "value": "This query over SiginLogs will summarise the total number of login attempts for each hour of the day on week days, this can be edited.\nThe query then uses Kusto anomaly detection to find login spikes for each hour across all days. The query"
           },
           {
             "name": "tactics",

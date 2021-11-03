@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may create cloud instances in unused geographic service regions in order to evade detection.\nAccess is usually obtained through compromising accounts used to manage cloud infrastructure.\nRefer: https://attack.mitre.org/techniques/T1535/"
+            "value": "Adversaries may create cloud instances in unused geographic service regions in order to evade detection.\nAccess is usually obtained through compromising accounts used to manage cloud infrastructure.\nRefer: https://attack.mitre.org/technique"
           },
           {
             "name": "tactics",

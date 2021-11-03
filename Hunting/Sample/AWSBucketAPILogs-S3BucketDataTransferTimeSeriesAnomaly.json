@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies when an anomalous spike occur in data transfer from an S3 bucket based on GetObject API call and the BytesTransferredOut field.\nThe query leverages KQL built-in anomaly detection algorithms to find large deviations from baseline patterns.\nSudden increases in execution frequency of sensitive actions should be further investigated for malicious activity.\nManually change scorethreshold from 1.5 to 3 or higher to reduce the noise based on outliers flagged from the query criteria.\nRead more about ingest custom logs using Logstash at https://github.com/Azure/Azure-Sentinel/wiki/Ingest-Custom-Logs-LogStash\nAWS S3 API GetObject at https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\nS3 LogStash Config: https://github.com/Azure/Azure-Sentinel/blob/master/Parsers/Logstash/input-aws_s3-output-loganalytics.conf\nS3 KQL Parser: https://github.com/Azure/Azure-Sentinel/blob/master/Parsers/AwsS3BucketAPILogsParser.txt"
+            "value": "Identifies when an anomalous spike occur in data transfer from an S3 bucket based on GetObject API call and the BytesTransferredOut field.\nThe query leverages KQL built-in anomaly detection algorithms to find large deviations from baseline "
           },
           {
             "name": "tactics",

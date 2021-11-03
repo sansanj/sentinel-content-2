@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "PATs are typically used for repeated, programmatic tasks. This query looks for PATs based authentication being used with an Operation not previous associated with PAT based authentication. This could indicate an attacker using a stolen PAT to perform malicious actions."
+            "value": "PATs are typically used for repeated, programmatic tasks. This query looks for PATs based authentication being used with an Operation not previous associated with PAT based authentication. This could indicate an attacker using a stolen PAT "
           },
           {
             "name": "tactics",

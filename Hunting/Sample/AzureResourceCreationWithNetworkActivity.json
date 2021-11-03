@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Indicates when an anomalous number of resources are created successfully in Azure via the AzureActivity log.\nThis is then joined with the AzureNetworkAnalytics_CL data to identify any network related activity for the created resource.\nThe anomaly detection identifies activities that have occured both since the start of the day 1 day ago and the start of the day 7 days ago.\nThe start of the day is considered 12am UTC time.\nResource creation could indicated malicious or spurious use of your Azure Resource allocation.  Resources can be abused in relation to digital\ncurrency mining, command and control, exfiltration, distributed attacks and propagation of malware, among others. Verify that this resource creation\nis expected.\nResources:\nhttps://docs.microsoft.com/azure/azure-monitor/insights/azure-networking-analytics\nhttps://docs.microsoft.com/azure/network-watcher/traffic-analytics-schema"
+            "value": "Indicates when an anomalous number of resources are created successfully in Azure via the AzureActivity log.\nThis is then joined with the AzureNetworkAnalytics_CL data to identify any network related activity for the created resource.\nThe a"
           },
           {
             "name": "tactics",

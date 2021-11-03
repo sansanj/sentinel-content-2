@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may manipulate accounts to maintain access to victim systems. These actions include adding new accounts to high privilleged groups. Dragonfly 2.0, for example, added newly created accounts to the administrators group to maintain elevated access.  The query below generates an output of all high Blast Radius users performing Add member to priveleged role, or where one or more features of the activitiy deviates from the user, his peers or the tenant profile."
+            "value": "Adversaries may manipulate accounts to maintain access to victim systems. These actions include adding new accounts to high privilleged groups. Dragonfly 2.0, for example, added newly created accounts to the administrators group to maintain"
           },
           {
             "name": "tactics",

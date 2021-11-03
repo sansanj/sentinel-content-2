@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Agent Pools provide a valuable resource to build processes. Creating and using a compromised agent pool in a pipeline could allow an attacker to compromise a build process. Whilst the creation of an agent pool itself is not malicious it is unlike to occur so often that it cannot be used as a hunting element when focusing on Azure DevOps activity."
+            "value": "Agent Pools provide a valuable resource to build processes. Creating and using a compromised agent pool in a pipeline could allow an attacker to compromise a build process. Whilst the creation of an agent pool itself is not malicious it is "
           },
           {
             "name": "tactics",

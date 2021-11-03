@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies when the system time was changed on a Windows host which can indicate potential timestomping activities.\nReference: Event ID 4616 is only available when the full event collection is enabled - https://docs.microsoft.com/azure/sentinel/connect-windows-security-events"
+            "value": "Identifies when the system time was changed on a Windows host which can indicate potential timestomping activities.\nReference: Event ID 4616 is only available when the full event collection is enabled - https://docs.microsoft.com/azure/sent"
           },
           {
             "name": "tactics",

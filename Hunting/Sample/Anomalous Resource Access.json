@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversary may be trying to move through the environment. APT29 and APT32, for example, has used PtH & PtT techniques to lateral move around the network. The query below generates an output of all users performing an resource access (4624:3) to devices for the first time."
+            "value": "Adversary may be trying to move through the environment. APT29 and APT32, for example, has used PtH & PtT techniques to lateral move around the network. The query below generates an output of all users performing an resource access (4624:3)"
           },
           {
             "name": "tactics",

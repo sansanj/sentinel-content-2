@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies IPs with failed attempts to sign in to one or more disabled accounts signed in successfully to another account.\nThis analytic will additionally identify the successful signed in accounts as the mapped account entities for investigation.\nReferences: https://docs.microsoft.com/azure/active-directory/reports-monitoring/reference-sign-ins-error-codes\n50057 - User account is disabled. The account has been disabled by an administrator."
+            "value": "Identifies IPs with failed attempts to sign in to one or more disabled accounts signed in successfully to another account.\nThis analytic will additionally identify the successful signed in accounts as the mapped account entities for investi"
           },
           {
             "name": "tactics",

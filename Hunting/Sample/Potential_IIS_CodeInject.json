@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Potential code injection into web server roles via scan of IIS logs. This represents an attempt to gain initial access to a system using a \ndrive-by compromise technique.  This sort of attack happens routinely as part of security scans, of both authorized and malicious types. \nThe initial goal of this detection is to flag these events when they occur and give an opportunity to review the data and filter out authorized activity."
+            "value": "Potential code injection into web server roles via scan of IIS logs. This represents an attempt to gain initial access to a system using a \ndrive-by compromise technique.  This sort of attack happens routinely as part of security scans, of "
           },
           {
             "name": "tactics",

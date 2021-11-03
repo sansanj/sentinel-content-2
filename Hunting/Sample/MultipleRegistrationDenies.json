@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This hunting query identifies users that have attempted to register for multiple webinars or recordings and has been denied by the organizer but have also successfully register for at least one event. The number of events a user needs to be rejected from to be included in this query is adjusted with the threshold variable."
+            "value": "This hunting query identifies users that have attempted to register for multiple webinars or recordings and has been denied by the organizer but have also successfully register for at least one event. The number of events a user needs to be"
           },
           {
             "name": "tactics",

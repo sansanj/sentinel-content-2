@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may disable security tools to avoid possible detection of their tools and activities. DarkComet, for example, can disable Security Center functions like anti-virus. The query below generates an output of all users performing a \"delete\" operation regarding a security policy, where one or more features of the activitiy deviates from the user, his peers or the tenant profile."
+            "value": "Adversaries may disable security tools to avoid possible detection of their tools and activities. DarkComet, for example, can disable Security Center functions like anti-virus. The query below generates an output of all users performing a \""
           },
           {
             "name": "tactics",

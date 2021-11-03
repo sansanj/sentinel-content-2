@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Checking for a threefold increase or more of Full Name lookup per Client IP for the current day for today vs the daily average for the previous week.\nThis can potentially identify excessive traffic to a given location that could be indicative of data transfer out of your network.\nThis is only Name lookups, so it would be recommended to review the Firewall\\Webproxy logs in relation to the ClientIP making the interesting requests."
+            "value": "Checking for a threefold increase or more of Full Name lookup per Client IP for the current day for today vs the daily average for the previous week.\nThis can potentially identify excessive traffic to a given location that could be indicati"
           },
           {
             "name": "tactics",

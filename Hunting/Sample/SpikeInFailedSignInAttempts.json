@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies spikes in failed sign-in events based on the volume of failed sign-in events over time. Use to identify patterns of suspicious behavior such as unusually high failed sign-in attempts from certain users.\nRef : https://docs.microsoft.com/azure/active-directory/fundamentals/security-operations-user-accounts"
+            "value": "Identifies spikes in failed sign-in events based on the volume of failed sign-in events over time. Use to identify patterns of suspicious behavior such as unusually high failed sign-in attempts from certain users.\nRef : https://docs.microso"
           },
           {
             "name": "tactics",

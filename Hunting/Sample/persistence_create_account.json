@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Summarizes uses of uncommon & undocumented commandline switches to create persistence\nUser accounts may be created to achieve persistence on a machine.\nRead more here: https://attack.mitre.org/wiki/Technique/T1136\nQuery for users being created using \"net user\" command\n\"net user\" commands are noisy, so needs to be joined with another signal -\ne.g. in this example we look for some undocumented variations (e.g. /ad instead of /add)"
+            "value": "Summarizes uses of uncommon & undocumented commandline switches to create persistence\nUser accounts may be created to achieve persistence on a machine.\nRead more here: https://attack.mitre.org/wiki/Technique/T1136\nQuery for users being crea"
           },
           {
             "name": "tactics",

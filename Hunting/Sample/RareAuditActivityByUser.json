@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Compares the current day to the last 14 days of audits to identify new audit activities by \nOperationName, InitiatedByUser, UserPrincipalName, PropertyName, newValue\nThis can be useful when attempting to track down malicious activity related to additions of \nnew users, additions to groups, removal from groups by specific users."
+            "value": "Compares the current day to the last 14 days of audits to identify new audit activities by \nOperationName, InitiatedByUser, UserPrincipalName, PropertyName, newValue\nThis can be useful when attempting to track down malicious activity relate"
           },
           {
             "name": "tactics",

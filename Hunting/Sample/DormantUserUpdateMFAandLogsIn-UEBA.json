@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query look for accounts that have not been successfully logged into recently who then add or update an MFA method before logging in.\nThreat actors may look to re-activate dormant accounts and use them for access by adding MFA methods in the hope that changes to such dormant accounts may go un-noticed. This query uses the Azure Sentinel UEBA features.\nRef: [LINK TO BLOG]"
+            "value": "This query look for accounts that have not been successfully logged into recently who then add or update an MFA method before logging in.\nThreat actors may look to re-activate dormant accounts and use them for access by adding MFA methods i"
           },
           {
             "name": "tactics",

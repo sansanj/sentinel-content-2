@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries often abuse email-forwarding rules to monitor activities of a victim, steal information and further gain intelligence on\nvictim or victim's organization.This query over Office Activity data highlights cases where user mail is being forwarded and shows if \nit is being forwarded to external domains as well."
+            "value": "Adversaries often abuse email-forwarding rules to monitor activities of a victim, steal information and further gain intelligence on\nvictim or victim's organization.This query over Office Activity data highlights cases where user mail is be"
           },
           {
             "name": "tactics",

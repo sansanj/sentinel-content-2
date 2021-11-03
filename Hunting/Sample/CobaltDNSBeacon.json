@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Cobalt Strike is a famous Pen Test tool that is used by pen testers as well as attackers alike To compromise an environment. \nThe query tries to detect suspicious DNS queries known from Cobalt Strike beacons.\nThis is based out of sigma rules described here: https://github.com/Neo23x0/sigma/blob/master/rules/network/net_mal_dns_cobaltstrike.yml"
+            "value": "Cobalt Strike is a famous Pen Test tool that is used by pen testers as well as attackers alike To compromise an environment. \nThe query tries to detect suspicious DNS queries known from Cobalt Strike beacons.\nThis is based out of sigma rule"
           },
           {
             "name": "tactics",

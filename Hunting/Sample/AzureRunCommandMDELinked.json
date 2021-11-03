@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies any Azure VM Run Command operations and links these operations with\nMDE host logging. Linking these two data sources provides hunting opportunities.\nLogging from AzureActivity provides the IP address and UPN of the account that\ninvoked the command. Joining this with logging from MDE provides insights into\nwhat cmdlets were loaded by the command."
+            "value": "Identifies any Azure VM Run Command operations and links these operations with\nMDE host logging. Linking these two data sources provides hunting opportunities.\nLogging from AzureActivity provides the IP address and UPN of the account that\ni"
           },
           {
             "name": "tactics",

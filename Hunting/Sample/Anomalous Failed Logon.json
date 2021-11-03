@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts. Emotet, for example, has been observed using a hard coded list of passwords to brute force user accounts. The query below generates an output of all users with 'High' BlastRadius that perform failed Sign-in:Invalid username or password."
+            "value": "Adversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts. Emotet, for example, has been observed using a hard coded list of passwords to brute force use"
           },
           {
             "name": "tactics",

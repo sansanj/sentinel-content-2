@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Checking for a threefold increase or more of domain lookups per client IP address for the current day vs daily average for the previous week.\nThis can potentially identify excessive traffic to a given location that could be indicative of data transfer out of your network to a group of systems based on the same second level domain.\nFor example, if one client is sending requests for test1.badguy.com and another client is sending requests for test2.badguy.com, you may not see a high enough count to be interesting.\nHowever, a combination of the requests to badguy.com could have a high enough count to be interesting.\nThis is only Name lookups, so it would be recommended to review the Firewall\\Webproxy logs in relation to the client IP address making the interesting requests."
+            "value": "Checking for a threefold increase or more of domain lookups per client IP address for the current day vs daily average for the previous week.\nThis can potentially identify excessive traffic to a given location that could be indicative of da"
           },
           {
             "name": "tactics",

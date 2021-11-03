@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "his hunting queries looks for multiple failed logon attempts in short span of time.\nThis query is based on the SQLEvent KQL Parser function (link below)\nSQLEvent KQL Parser provided at https://github.com/Azure/Azure-Sentinel/tree/master/Parsers/SQLSever\nDetailed blog post on Monitoring SQL Server with Azure Sentinel https://techcommunity.microsoft.com/t5/azure-sentinel/monitoring-sql-server-with-azure-sentinel/ba-p/150296"
+            "value": "his hunting queries looks for multiple failed logon attempts in short span of time.\nThis query is based on the SQLEvent KQL Parser function (link below)\nSQLEvent KQL Parser provided at https://github.com/Azure/Azure-Sentinel/tree/master/Par"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This will help you determine if mailbox login was done from Exchange Powershell session. \nBy default, all accounts you create in Office 365 are allowed to use Exchange Online PowerShell. \nAdministrators can use Exchange Online PowerShell to enable or disable a user's ability to connect to Exchange Online PowerShell.\nWhitelist any benign scheduled activities using exchange powershell if applicable in your environment.\nReferences: https://docs.microsoft.com/powershell/exchange/exchange-online/connect-to-exchange-online-powershell/connect-to-exchange-online-powershell?view=exchange-ps"
+            "value": "This will help you determine if mailbox login was done from Exchange Powershell session. \nBy default, all accounts you create in Office 365 are allowed to use Exchange Online PowerShell. \nAdministrators can use Exchange Online PowerShell to"
           },
           {
             "name": "tactics",

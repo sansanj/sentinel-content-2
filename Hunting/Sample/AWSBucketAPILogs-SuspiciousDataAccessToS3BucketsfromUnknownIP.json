@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Adversaries may access data objects from improperly secured cloud storage. This query will identify any access originating from a Source IP which was not seen historically accessing the bucket or downloading files from it.\nYou can also limit the query to only private buckets with sensitive files by setting the value or list of values to BucketName column.\nRead more about ingest custom logs using Logstash at https://github.com/Azure/Azure-Sentinel/wiki/Ingest-Custom-Logs-LogStash \nand AWS S3 API GetObject at https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html and ListObject at https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html\nand ListBucket at https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\nS3 LogStash Config: https://github.com/Azure/Azure-Sentinel/blob/master/Parsers/Logstash/input-aws_s3-output-loganalytics.conf\nS3 KQL Parser: https://github.com/Azure/Azure-Sentinel/blob/master/Parsers/AwsS3BucketAPILogsParser.txt"
+            "value": "Adversaries may access data objects from improperly secured cloud storage. This query will identify any access originating from a Source IP which was not seen historically accessing the bucket or downloading files from it.\nYou can also limi"
           },
           {
             "name": "tactics",

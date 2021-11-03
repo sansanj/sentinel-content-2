@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query over Azure Active Directory sign-in considers all user sign-ins for each Azure Active \nDirectory application and picks out the most anomalous change in location profile for a user within an \nindividual application. The intent is to hunt for user account compromise, possibly via a specific application\nvector.\nThis variation of the query joins the results back onto the original sign-in data to allow review of the \nlocation set with each identified user in tabular form."
+            "value": "This query over Azure Active Directory sign-in considers all user sign-ins for each Azure Active \nDirectory application and picks out the most anomalous change in location profile for a user within an \nindividual application. The intent is "
           },
           {
             "name": "tactics",

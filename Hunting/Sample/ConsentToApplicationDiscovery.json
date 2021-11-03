@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query looks at the last 14 days for any \"Consent to application\" operation\noccurs by a user or app. This could indicate that permissions to access the listed AzureApp\nwas provided to a malicious actor. Consent to appliction, Add service principal and\nAdd OAuth2PermissionGrant events should be rare. If available, additional context is added\nfrom the AuditLogs based on CorrleationId from the same account that performed \"Consent to\napplication\".\nFor further information on AuditLogs please see\nhttps://docs.microsoft.com/azure/active-directory/reports-monitoring/reference-audit-activities\nThis may help detect the Oauth2 attack that can be initiated by this publicly available tool\nhttps://github.com/fireeye/PwnAuth"
+            "value": "This query looks at the last 14 days for any \"Consent to application\" operation\noccurs by a user or app. This could indicate that permissions to access the listed AzureApp\nwas provided to a malicious actor. Consent to appliction, Add servic"
           },
           {
             "name": "tactics",

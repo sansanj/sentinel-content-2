@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query will determine rare activity by a high-value account carried out on a system or service.\nHigh Value accounts are determined by Group Membership to High Value groups via events listed below.\nRare here means an activity type seen in the last day which has not been seen in the previous 7 days.\nIf any account with such rare activity is found, the query will attempt to retrieve related activity\nfrom that account on that same day and summarize the information.\n4728 - A member was added to a security-enabled global group\n4732 - A member was added to a security-enabled local group\n4756 - A member was added to a security-enabled universal group"
+            "value": "This query will determine rare activity by a high-value account carried out on a system or service.\nHigh Value accounts are determined by Group Membership to High Value groups via events listed below.\nRare here means an activity type seen i"
           },
           {
             "name": "tactics",

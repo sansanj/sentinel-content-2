@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query over Azure AD sign-in activity highlights use of legacy authentication protocol in the\nenvironment. Because conditional access policies are not evaluated when legacy authentication is used,\nlegacy authentication can be used to circumvent all Azure Conditional Access policies."
+            "value": "This query over Azure AD sign-in activity highlights use of legacy authentication protocol in the\nenvironment. Because conditional access policies are not evaluated when legacy authentication is used,\nlegacy authentication can be used to ci"
           },
           {
             "name": "tactics",

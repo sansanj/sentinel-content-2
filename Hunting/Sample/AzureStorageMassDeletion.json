@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Detect mass file deletion events within Azure File and Blob storage. deleteWindow controls\nthe period of time the deletions must occur in, whilst the deleteThreshold controls how many files\nmust be deleted within that threshold. Query works on a per-IP address basis, so will only detect a single\nIP deleting multiple files."
+            "value": "Detect mass file deletion events within Azure File and Blob storage. deleteWindow controls\nthe period of time the deletions must occur in, whilst the deleteThreshold controls how many files\nmust be deleted within that threshold. Query works"
           },
           {
             "name": "tactics",

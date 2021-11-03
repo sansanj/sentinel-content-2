@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Web shells are script that when uploaded to a web server can be used for remote administration. \nAttackers often use web shells to obtain unauthorized access, escalate //privilege as well as further compromise the environment. \nThe query detects web shells that use GET requests by keyword searches in URL strings. \nThis is based out of sigma rules described //here (https://github.com/Neo23x0/sigma/blob/master/rules/web/web_webshell_keyword.yml). \nThere could be some web sites like wikis with articles on os commands and pages that include the os //commands in the URLs that might cause FP."
+            "value": "Web shells are script that when uploaded to a web server can be used for remote administration. \nAttackers often use web shells to obtain unauthorized access, escalate //privilege as well as further compromise the environment. \nThe query de"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This hunting query uses Application events from the \"MSSQL$MICROSOFT##WID\" provider to collect SQL statements run against an AD FS database (e.g Windows Internal Database (WID)).\nA threat actor might want to extract the AD FS data configuration settings with a SQL statement or modify it with an UPDATE SQL statement.\nIn order to use this query you need to create a server audit and database audit specification on your AD FS database.\nReference: https://github.com/Azure/SimuLand/blob/main/3_simulate_detect/credential-access/exportADFSTokenSigningCertificate.md\nReference: https://o365blog.com/post/adfs/\n"
+            "value": "This hunting query uses Application events from the \"MSSQL$MICROSOFT##WID\" provider to collect SQL statements run against an AD FS database (e.g Windows Internal Database (WID)).\nA threat actor might want to extract the AD FS data configura"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query look for users starting an Azure CloudShell session and summarizes the Azure Activity from that\nuser account during that timeframe (by default 1 hour). This can be used to help identify abuse of the CloudShell\nto modify Azure resources."
+            "value": "This query look for users starting an Azure CloudShell session and summarizes the Azure Activity from that\nuser account during that timeframe (by default 1 hour). This can be used to help identify abuse of the CloudShell\nto modify Azure res"
           },
           {
             "name": "tactics",

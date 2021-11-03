@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query over SiginLogs will identify user accounts that have logged in from two different countries\nwithin a specified time window, by default this is a 10 minute window either side of the previous login.\nThis query will detect users roaming onto VPNs, it is possible to exclude known VPN IP address ranges."
+            "value": "This query over SiginLogs will identify user accounts that have logged in from two different countries\nwithin a specified time window, by default this is a 10 minute window either side of the previous login.\nThis query will detect users roa"
           },
           {
             "name": "tactics",

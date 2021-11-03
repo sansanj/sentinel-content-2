@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "This query shows when 1200 (20 per minute) or more failed attempts by cIP per hour occur on a given server and then a successful logon by cIP. \nThis only includes when more than 1 user agent strings is used or more than 1 port is used.\nThis could be indicative of successful probing and password brute force success on your IIS servers. \nFeel free to adjust the threshold as needed - ConnectionCount >= 1200 \nReferences: Status code mappings for your convenience, also inline if the mapping is not available\nIIS status code mapping - https://support.microsoft.com/help/943891/the-http-status-code-in-iis-7-0-iis-7-5-and-iis-8-0\nWin32 Status code mapping - https://msdn.microsoft.com/library/cc231199.aspx"
+            "value": "This query shows when 1200 (20 per minute) or more failed attempts by cIP per hour occur on a given server and then a successful logon by cIP. \nThis only includes when more than 1 user agent strings is used or more than 1 port is used.\nThis"
           },
           {
             "name": "tactics",

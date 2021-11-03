@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "his query is based on the SQLEvent KQL Parser function (link below) and detects failed logons on SQL Server \nSQLEvent KQL Parser provided at https://github.com/Azure/Azure-Sentinel/tree/master/Parsers/SQLSever\nDetailed blog post on Monitoring SQL Server with Azure Sentinel https://techcommunity.microsoft.com/t5/azure-sentinel/monitoring-sql-server-with-azure-sentinel/ba-p/150296"
+            "value": "his query is based on the SQLEvent KQL Parser function (link below) and detects failed logons on SQL Server \nSQLEvent KQL Parser provided at https://github.com/Azure/Azure-Sentinel/tree/master/Parsers/SQLSever\nDetailed blog post on Monitori"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Malformed web requests are sometimes used for reconnaissance to detect the presence of network security devices.\nHunting for a large number of requests from a single source may assist in locating compromised hosts. Note: internal sites may\nbe detected by this query and may need excluding on a individual basis. This query presumes the default squid log format is\nbeing used."
+            "value": "Malformed web requests are sometimes used for reconnaissance to detect the presence of network security devices.\nHunting for a large number of requests from a single source may assist in locating compromised hosts. Note: internal sites may\n"
           },
           {
             "name": "tactics",

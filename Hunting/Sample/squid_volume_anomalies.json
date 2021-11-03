@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Malware infections or data exfiltration activity often leads to anomalies in network data volume\nthis hunting query looks for anomalies in the volume of bytes traversing a squid proxy. Anomalies require further\ninvestigation to determine cause. This query presumes the default squid log format is being used."
+            "value": "Malware infections or data exfiltration activity often leads to anomalies in network data volume\nthis hunting query looks for anomalies in the volume of bytes traversing a squid proxy. Anomalies require further\ninvestigation to determine ca"
           },
           {
             "name": "tactics",

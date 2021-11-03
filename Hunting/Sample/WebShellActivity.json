@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Web shells are scripts that, when uploaded to a web server, can be used to provide a backdoor to a compromised network.\nAttackers can use this entry point to leave malicious implants, such as obtaining unauthorized access, escalating privilege, and further compromising the environment.\n\nThis query hunts for web shells by analysing the distribution of commonly-used web shell scripts against regular scripts for those public client IPs which have not observed any W3CIIS activity in a fixed lookback period.\nThe results obtained summarise the public client IPs, user agents, and the distribution of the above scripts between the start and end time."
+            "value": "Web shells are scripts that, when uploaded to a web server, can be used to provide a backdoor to a compromised network.\nAttackers can use this entry point to leave malicious implants, such as obtaining unauthorized access, escalating privil"
           },
           {
             "name": "tactics",

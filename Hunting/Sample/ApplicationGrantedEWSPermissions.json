@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Finds AD applications granted permissions to read users mailboxes via Exchange Web Services (EWS). A threat actor could add these permissions to an application they control in order to gain persistent access to user's mail.\nReview the applications granted these permissions to ensure they are required and were granted legitimately."
+            "value": "Finds AD applications granted permissions to read users mailboxes via Exchange Web Services (EWS). A threat actor could add these permissions to an application they control in order to gain persistent access to user's mail.\nReview the appli"
           },
           {
             "name": "tactics",

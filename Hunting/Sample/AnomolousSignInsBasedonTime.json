@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies anomolies in signin events based on the volume of signin events over time. Use this to identify suspicious authentication patterns such as spikes in activity or out of hours events.\nRef : https://docs.microsoft.comazure/active-directory/fundamentals/security-operations-privileged-accounts#things-to-monitor"
+            "value": "Identifies anomolies in signin events based on the volume of signin events over time. Use this to identify suspicious authentication patterns such as spikes in activity or out of hours events.\nRef : https://docs.microsoft.comazure/active-di"
           },
           {
             "name": "tactics",

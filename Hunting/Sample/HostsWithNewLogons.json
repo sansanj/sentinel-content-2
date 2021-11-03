@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Shows new accounts that have logged onto a host for the first time - this may clearly be benign activity but an account\nlogging onto multiple hosts for the first time can also be used to look for evidence of that account being used to move\nlaterally across a network."
+            "value": "Shows new accounts that have logged onto a host for the first time - this may clearly be benign activity but an account\nlogging onto multiple hosts for the first time can also be used to look for evidence of that account being used to move\n"
           },
           {
             "name": "tactics",

@@ -21,7 +21,7 @@
         "tags": [
           {
             "name": "description",
-            "value": "Identifies accounts that have been locked out by smart lockout policies. Review this results for patterns that might suggest that a password spray is triggering these smart lockout events.\nRef : https://docs.microsoft.com/azure/active-directory/fundamentals/security-operations-user-accounts#monitoring-for-failed-unusual-sign-ins"
+            "value": "Identifies accounts that have been locked out by smart lockout policies. Review this results for patterns that might suggest that a password spray is triggering these smart lockout events.\nRef : https://docs.microsoft.com/azure/active-direc"
           },
           {
             "name": "tactics",
