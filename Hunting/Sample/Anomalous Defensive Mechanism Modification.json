@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Anomalous Defensive Mechanism Modification')]",
+      "name": "[concat(parameters('workspace'), '/AnomalousDefensiveMechanismModification')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

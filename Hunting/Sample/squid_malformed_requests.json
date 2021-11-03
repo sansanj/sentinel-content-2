@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'squid_malformed_requests')]",
+      "name": "[concat(parameters('workspace'), '/squid_malformed_requests')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

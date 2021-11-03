@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'imProcess_cscript_summary')]",
+      "name": "[concat(parameters('workspace'), '/imProcess_cscript_summary')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Suspicious_Windows_Login_outside_normal_hours')]",
+      "name": "[concat(parameters('workspace'), '/Suspicious_Windows_Login_outside_normal_hours')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

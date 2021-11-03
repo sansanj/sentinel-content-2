@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Anomalous_Listing_Of_Storage_Keys')]",
+      "name": "[concat(parameters('workspace'), '/Anomalous_Listing_Of_Storage_Keys')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

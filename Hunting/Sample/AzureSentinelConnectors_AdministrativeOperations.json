@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'AzureSentinelConnectors_AdministrativeOperations')]",
+      "name": "[concat(parameters('workspace'), '/AzureSentinelConnectors_AdministrativeOperations')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

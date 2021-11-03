@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Mail_redirect_via_ExO_transport_rule_hunting')]",
+      "name": "[concat(parameters('workspace'), '/Mail_redirect_via_ExO_transport_rule_hunting')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

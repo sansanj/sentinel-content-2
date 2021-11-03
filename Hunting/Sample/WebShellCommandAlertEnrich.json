@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'WebShellCommandAlertEnrich')]",
+      "name": "[concat(parameters('workspace'), '/WebShellCommandAlertEnrich')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

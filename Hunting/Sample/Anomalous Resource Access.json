@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Anomalous Resource Access')]",
+      "name": "[concat(parameters('workspace'), '/AnomalousResourceAccess')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Anomalous Account Creation')]",
+      "name": "[concat(parameters('workspace'), '/AnomalousAccountCreation')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

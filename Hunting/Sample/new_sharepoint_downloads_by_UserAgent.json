@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'new_sharepoint_downloads_by_UserAgent')]",
+      "name": "[concat(parameters('workspace'), '/new_sharepoint_downloads_by_UserAgent')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

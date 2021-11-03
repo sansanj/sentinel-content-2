@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Org Repositories Default Permissions Change')]",
+      "name": "[concat(parameters('workspace'), '/OrgRepositoriesDefaultPermissionsChange')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

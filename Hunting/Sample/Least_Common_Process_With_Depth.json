@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Least_Common_Process_With_Depth')]",
+      "name": "[concat(parameters('workspace'), '/Least_Common_Process_With_Depth')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

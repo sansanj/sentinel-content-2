@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'PermutationsOnLogonNames')]",
+      "name": "[concat(parameters('workspace'), '/PermutationsOnLogonNames')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

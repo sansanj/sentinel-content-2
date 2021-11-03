@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Signins-From-VPS-Providers')]",
+      "name": "[concat(parameters('workspace'), '/Signins-From-VPS-Providers')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

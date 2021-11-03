@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'double_file_ext_exes')]",
+      "name": "[concat(parameters('workspace'), '/double_file_ext_exes')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

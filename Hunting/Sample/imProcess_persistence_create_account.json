@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'imProcess_persistence_create_account')]",
+      "name": "[concat(parameters('workspace'), '/imProcess_persistence_create_account')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

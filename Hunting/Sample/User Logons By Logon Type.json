@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'User Logons By Logon Type')]",
+      "name": "[concat(parameters('workspace'), '/UserLogonsByLogonType')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

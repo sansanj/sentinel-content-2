@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Unusual Number of Repository Clones')]",
+      "name": "[concat(parameters('workspace'), '/UnusualNumberofRepositoryClones')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

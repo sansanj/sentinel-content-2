@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'imProcess_enumeration_user_and_group')]",
+      "name": "[concat(parameters('workspace'), '/imProcess_enumeration_user_and_group')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

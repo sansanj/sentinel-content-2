@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Anomalous Code Execution')]",
+      "name": "[concat(parameters('workspace'), '/AnomalousCodeExecution')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",

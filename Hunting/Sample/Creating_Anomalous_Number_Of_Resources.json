@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
       "apiVersion": "2020-08-01",
-      "name": "[concat(parameters('workspace'), 'Creating_Anomalous_Number_Of_Resources')]",
+      "name": "[concat(parameters('workspace'), '/Creating_Anomalous_Number_Of_Resources')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "eTag": "*",
