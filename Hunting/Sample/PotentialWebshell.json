@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspace": {
+      "type": "String"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/savedSearches",
+      "apiVersion": "2020-08-01",
+      "name": "[concat(parameters('workspace'), 'PotentialWebshell')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "eTag": "*",
+        "displayName": "Web shell Detection",
+        "category": "Hunting Queries",
+        "query": "\nlet command = \"(?i)net(1)?(.exe)?(%20){1,}user|cmd(.exe)?(%20){1,}/c(%20){1,}\";\nW3CIISLog\n| where csMethod == \"GET\" \n| where ( csUriQuery has \"whoami\" or csUriQuery matches regex command ) or \n        ( csUriStem has \"whoami\" or csUriStem matches regex command ) or\n        ( csReferer has \"whoami\" or csReferer matches regex command )\n| summarize StartTime = max(TimeGenerated), EndTime = min(TimeGenerated), ConnectionCount = count() \nby Computer, sSiteName, sIP, cIP, csUserName, csUriQuery, csMethod, scStatus, scSubStatus, scWin32Status\n| extend timestamp = StartTime, IPCustomEntity = cIP, HostCustomEntity = Computer, AccountCustomEntity = csUserName \n",
+        "version": 1,
+        "tags": [
+          {
+            "name": "description",
+            "value": "Web shells are script that when uploaded to a web server can be used for remote administration. \nAttackers often use web shells to obtain unauthorized access, escalate //privilege as well as further compromise the environment. \nThe query detects web shells that use GET requests by keyword searches in URL strings. \nThis is based out of sigma rules described //here (https://github.com/Neo23x0/sigma/blob/master/rules/web/web_webshell_keyword.yml). \nThere could be some web sites like wikis with articles on os commands and pages that include the os //commands in the URLs that might cause FP."
+          },
+          {
+            "name": "tactics",
+            "value": "Persistence,PrivilegeEscalation"
+          },
+          {
+            "name": "relevantTechniques",
+            "value": "T1505"
+          }
+        ]
+      }
+    }
+  ]
+}
