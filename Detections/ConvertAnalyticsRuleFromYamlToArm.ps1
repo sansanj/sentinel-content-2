@@ -1,3 +1,4 @@
+$jsonConversionDepth = 50
 function checkISO8601Format($field) {
     if ($field.IndexOf("D") -ne -1) {
         return "P$field"
@@ -100,5 +101,5 @@ function ConvertAnalyticsRuleFromYamlToArm {
     $baseMainTemplate.parameters | Add-Member -MemberType NoteProperty -Name $alertRuleParameterName -Value $alertRuleParameter
          
 
-    ConvertTo-Json $baseMainTemplate -EscapeHandling Default -Depth 5  | Set-Content -Path $outputFilePath
+    ConvertTo-Json $baseMainTemplate -EscapeHandling Default -Depth $jsonConversionDepth  | Set-Content -Path $outputFilePath
 }

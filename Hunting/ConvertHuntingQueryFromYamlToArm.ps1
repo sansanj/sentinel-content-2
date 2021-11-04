@@ -1,3 +1,4 @@
+$jsonConversionDepth = 50
 function ConvertHuntingQueryFromYamlToArm {
     param (
         # Parameter help description
@@ -92,5 +93,5 @@ function ConvertHuntingQueryFromYamlToArm {
     $baseHuntingObject.resources = @();
     $baseHuntingObject.resources += $huntingQueryObj;
 
-    ConvertTo-Json $baseHuntingObject -EscapeHandling Default -Depth 5  | Set-Content -Path $outputFilePath
+    ConvertTo-Json $baseHuntingObject -EscapeHandling Default -Depth $jsonConversionDepth  | Set-Content -Path $outputFilePath
 }
