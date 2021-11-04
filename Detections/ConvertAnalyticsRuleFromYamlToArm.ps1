@@ -47,12 +47,12 @@ function ConvertAnalyticsRuleFromYamlToArm {
 
     $baseMainTemplate = ConvertFrom-Json $basicJson
 
-
+    $ruleId = New-Guid
     $yamlPropertiesToCopyFrom = "name", "severity", "triggerThreshold", "query"
     $yamlPropertiesToCopyTo = "displayName", "severity", "triggerThreshold", "query"
     $alertRuleParameterName = "analytic-id"
     $alertRule = [PSCustomObject] @{ description = ""; displayName = ""; enabled = $false; query = ""; queryFrequency = ""; queryPeriod = ""; severity = ""; suppressionDuration = ""; suppressionEnabled = $false; triggerOperator = ""; triggerThreshold = 0; }
-    $alertRuleParameter = [PSCustomObject] @{ type = "string"; defaultValue = "[newGuid()]"; minLength = 1; metadata = [PSCustomObject] @{ description = "Unique id for the scheduled alert rule" }; }
+    $alertRuleParameter = [PSCustomObject] @{ type = "string"; defaultValue = "$ruleId"; minLength = 1; metadata = [PSCustomObject] @{ description = "Unique id for the scheduled alert rule" }; }
 
     # Copy all directly transposable properties
     foreach ($yamlProperty in $yamlPropertiesToCopyFrom) {

@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "[newGuid()]",
+      "defaultValue": "a9e634de-9225-459a-9679-f3ae960fe149",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -22,19 +22,21 @@
       "kind": "Scheduled",
       "location": "[resourceGroup().location]",
       "properties": {
-        "description": "Searches for triggered Indicators of Exposures related to Active Directory attacks pathways",
-        "displayName": "Alsid Active Directory attacks pathways",
+        "description": "Create alert on web sites blocked by Eset.",
+        "displayName": "Web sites blocked by Eset",
         "enabled": false,
-        "query": "let SeverityTable=datatable(Severity:string,Level:int) [\n\"low\", 1,\n\"medium\", 2,\n\"high\", 3,\n\"critical\", 4\n];\nlet codeNameList = datatable(Codename:string)[\"C-PRIV-ACCOUNTS-SPN\", \"C-SDPROP-CONSISTENCY\", \"C-DANG-PRIMGROUPID\", \"C-GPO-HARDENING\", \"C-DC-ACCESS-CONSISTENCY\", \"C-DANGEROUS-TRUST-RELATIONSHIP\", \"C-UNCONST-DELEG\", \"C-ABNORMAL-ENTRIES-IN-SCHEMA\"];\nafad_parser\n| where MessageType == 0 and Codename in~ (codeNameList)\n| lookup kind=leftouter SeverityTable on Severity\n| order by Level\n",
-        "queryFrequency": "PT2H",
-        "queryPeriod": "PT2H",
+        "query": "eset_CL\n| where event_type_s == 'FilteredWebsites_Event'\n| extend AccountCustomEntity = username_s, URLCustomEntity = object_uri_s, HostCustomEntity = hostname_s, IPCustomEntity = ipv4_s\n",
+        "queryFrequency": "PT5M",
+        "queryPeriod": "PT5M",
         "severity": "Low",
         "suppressionDuration": "PT1H",
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
         "tactics": [
-          "CredentialAccess"
+          "Exfiltration",
+          "CommandAndControl",
+          "InitialAccess"
         ]
       }
     }
