@@ -39,10 +39,10 @@ jobs:
         enable-AzPSSession: true
 
     - name: Wait 30 seconds if login attempt 1 failed
-      uses: juliangruber/sleep-action@v1
       if: ${{ env.cloudEnv == 'AzureCloud' && steps.login1.outcome=='failure' }}
       with:
-        time: 30s
+        run: Start-Sleep -s 30
+        shell: powershell
     
     - name: Login to Azure (Attempt 2)
       continue-on-error: true
@@ -57,7 +57,8 @@ jobs:
       uses: juliangruber/sleep-action@v1
       if: ${{ env.cloudEnv == 'AzureCloud' && steps.login2.outcome=='failure' }}
       with:
-        time: 30s
+        run: Start-Sleep -s 30
+        shell: powershell
     
     - name: Login to Azure (Attempt 3)
       continue-on-error: false
@@ -70,16 +71,8 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v1
-
-    - name: Read deployment script
-      id: deploymentScript
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: '${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1'
     
     - name: Deploy Content to Azure Sentinel
-      uses: azure/powershell@v1
       with:
-        azPSVersion: 'latest'
-        inlineScript: |
-          ${{ steps.deploymentScript.outputs.content }}
+        run: '${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1'
+        shell: powershell
