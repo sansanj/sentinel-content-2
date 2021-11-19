@@ -65,5 +65,5 @@ jobs:
       uses: actions/checkout@v1
     
     - name: Deploy Content to Azure Sentinel
-      run: echo ${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1
+      run: '${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1'
       shell: powershell
