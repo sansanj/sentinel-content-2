@@ -23,7 +23,7 @@ jobs:
     env:
       resourceGroupName: 'eco-connector-test'
       workspaceName: 'eco-connector-test'
-      directory: ${{ github.workspace }}\Workbooks\Sample'
+      directory: ${{ github.workspace }}'
       cloudEnv: 'AzureCloud'
       creds: ${{ secrets.AZURE_SENTINEL_CREDENTIALS_80c4c5120e0f404cb6f3ae3a8389a34c }}
       contentTypes: 'Workbook'
