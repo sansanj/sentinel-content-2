@@ -9,12 +9,7 @@ name: Deploy Content to eco-connector-test [80c4c512-0e0f-404c-b6f3-ae3a8389a34c
 #   2. Append the path to the directory environment variable below
 #       directory: '${{ github.workspace }}/SentinelContent'
 
-on: 
-  push:
-    branches: [ main ]
-    paths:
-    - '**'
-    - '.github/workflows/sentinel-deploy-80c4c512-0e0f-404c-b6f3-ae3a8389a34c.yml'
+on: workflow_dispatch
 
 jobs:
   deploy-content:
