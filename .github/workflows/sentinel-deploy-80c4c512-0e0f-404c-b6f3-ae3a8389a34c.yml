@@ -16,14 +16,14 @@ on:
     - '**'
     - '!.github/workflows/**'  # this filter prevents other workflow changes from triggering this workflow
     - '.github/workflows/sentinel-deploy-80c4c512-0e0f-404c-b6f3-ae3a8389a34c.yml'
-    
+
 jobs:
   deploy-content:
     runs-on: windows-latest
     env:
       resourceGroupName: 'eco-connector-test'
       workspaceName: 'eco-connector-test'
-      directory: ${{ github.workspace }}'
+      directory: '${{ github.workspace }}'
       cloudEnv: 'AzureCloud'
       creds: ${{ secrets.AZURE_SENTINEL_CREDENTIALS_80c4c5120e0f404cb6f3ae3a8389a34c }}
       contentTypes: 'Workbook'
