@@ -9,13 +9,7 @@ name: Deploy Content to eco-connector-test [80c4c512-0e0f-404c-b6f3-ae3a8389a34c
 #   2. Append the path to the directory environment variable below
 #       directory: '${{ github.workspace }}/SentinelContent'
 
-on: 
-  push:
-    branches: [ main ]
-    paths:
-    - '**'
-    - '!.github/workflows/**'  # this filter prevents other workflow changes from triggering this workflow
-    - '.github/workflows/sentinel-deploy-80c4c512-0e0f-404c-b6f3-ae3a8389a34c.yml'
+on: workflow_dispatch
 
 jobs:
   deploy-content:
@@ -39,10 +33,10 @@ jobs:
         enable-AzPSSession: true
 
     - name: Wait 30 seconds if login attempt 1 failed
-      uses: juliangruber/sleep-action@v1
+      run: Start-Sleep -s 30
+      shell: powershell
       if: ${{ env.cloudEnv == 'AzureCloud' && steps.login1.outcome=='failure' }}
-      with:
-        time: 30s
+
     
     - name: Login to Azure (Attempt 2)
       continue-on-error: true
@@ -54,10 +48,9 @@ jobs:
         enable-AzPSSession: true
 
     - name: Wait 30 seconds if login attempt 2 failed
-      uses: juliangruber/sleep-action@v1
+      run: Start-Sleep -s 30
+      shell: powershell
       if: ${{ env.cloudEnv == 'AzureCloud' && steps.login2.outcome=='failure' }}
-      with:
-        time: 30s
     
     - name: Login to Azure (Attempt 3)
       continue-on-error: false
@@ -70,16 +63,7 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v1
-
-    - name: Read deployment script
-      id: deploymentScript
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: '${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1'
     
     - name: Deploy Content to Azure Sentinel
-      uses: azure/powershell@v1
-      with:
-        azPSVersion: 'latest'
-        inlineScript: |
-          ${{ steps.deploymentScript.outputs.content }}
+      run: echo ${{ github.workspace }}/.github/workflows/azure-sentinel-deploy.ps1
+      shell: powershell
