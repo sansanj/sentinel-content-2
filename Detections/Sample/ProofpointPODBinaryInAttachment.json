@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "a01650c9-7fc6-4421-9493-d8a24d36683c",
+      "defaultValue": "8ed981a2-337b-4542-a371-3968ac93f923",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,35 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "eb68b129-5f17-4f56-bf6d-dde48d5e615a",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "ProofpointPOD",
+            "dataTypes": [
+              "ProofpointPOD_message_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

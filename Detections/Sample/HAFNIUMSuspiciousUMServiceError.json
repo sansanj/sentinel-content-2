@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "8e31bdc1-d56e-4a1d-aec0-3b75818c9e7d",
+      "defaultValue": "a814a61a-672f-431f-9b2b-869e9bcaa534",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,30 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "0625fcce-6d52-491e-8c68-1d9b801d25b9",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          }
+        ],
+        "techniques": [
+          "T1190"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

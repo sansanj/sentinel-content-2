@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "9655d6bd-b79d-43e8-b199-b109dff50761",
+      "defaultValue": "d012df68-9c36-431a-acc1-704063e21101",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,70 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "01f64465-b1ef-41ea-a7f5-31553a11ad43",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": [
+          "T1204"
+        ],
         "tactics": [
           "Execution"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "TrendMicro",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

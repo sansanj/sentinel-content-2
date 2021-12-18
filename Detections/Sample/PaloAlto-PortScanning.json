@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "a924b93b-f326-4a1d-9520-6abba9bad3dd",
+      "defaultValue": "74131d4a-83fd-4606-a5f4-71dc1d169a3d",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,55 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "5b72f527-e3f6-4a00-9908-8e4fee14da9f",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1046"
+        ],
         "tactics": [
           "Discovery"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

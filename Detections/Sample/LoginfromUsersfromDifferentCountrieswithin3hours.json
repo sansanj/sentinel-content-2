@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "eace0d67-a6e1-42d6-96db-096f089779d7",
+      "defaultValue": "86475faa-04ff-4383-86b2-ebca93ca8097",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,37 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "2954d424-f786-4677-9ffc-c24c44c6e7d5",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": [
+          "T1078"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "OktaSSO",
+            "dataTypes": [
+              "Okta_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

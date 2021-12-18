@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "31e7dcbf-aebc-4046-b1e4-526524287671",
+      "defaultValue": "a0021314-e49e-45d9-801f-e7bca20e9046",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,40 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "b4ceb583-4c44-4555-8ecf-39f572e827ba",
+        "tags": [
+          "Solorigate",
+          "NOBELIUM"
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": [
+          "T1114"
+        ],
         "tactics": [
           "Collection"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "Office365",
+            "dataTypes": [
+              "OfficeActivity"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

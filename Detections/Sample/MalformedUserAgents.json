@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "03006c6b-d532-4799-baac-0ab52bac8481",
+      "defaultValue": "89bbc939-d47e-4b36-82dc-bcec562f0763",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,11 +33,80 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "a357535e-f722-4afe-b375-cff362b2b376",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1189",
+          "T1071",
+          "T1203"
+        ],
         "tactics": [
           "InitialAccess",
           "CommandAndControl",
           "Execution"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "WAF",
+            "dataTypes": [
+              "AzureDiagnostics"
+            ]
+          },
+          {
+            "connectorId": "Office365",
+            "dataTypes": [
+              "OfficeActivity"
+            ]
+          },
+          {
+            "connectorId": "AzureActiveDirectory",
+            "dataTypes": [
+              "SigninLogs"
+            ]
+          },
+          {
+            "connectorId": "AzureActiveDirectory",
+            "dataTypes": [
+              "AADNonInteractiveUserSignInLogs"
+            ]
+          },
+          {
+            "connectorId": "AWS",
+            "dataTypes": [
+              "AWSCloudTrail"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(IIS)",
+            "dataTypes": [
+              "W3CIISLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

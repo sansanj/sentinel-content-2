@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "579c8e03-3c63-481d-95d0-c2387c39f21e",
+      "defaultValue": "9d356cdc-fd63-4071-bc5b-f06d5effc36f",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,51 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "f8b3c49c-4087-499b-920f-0dcfaff0cbca",
+        "tags": [
+          {
+            "Id": "ca67c83e-7fff-4127-a3e3-1af66d6d4cad",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMProcessEvent"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          }
+        ],
+        "techniques": [
+          "T1059",
+          "T1027",
+          "T1140"
+        ],
         "tactics": [
           "Execution",
           "DefenseEvasion"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

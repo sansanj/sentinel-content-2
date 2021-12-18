@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "0d1b89fc-4c62-4fb3-848d-e3b4b4681fce",
+      "defaultValue": "b40835ac-6aa1-44c8-94ee-9634550cbf43",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,44 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "ee1818ec-5f65-4991-b711-bcf2ab7e36c3",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "CommandandControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "CiscoUmbrellaDataConnector",
+            "dataTypes": [
+              "Cisco_Umbrella_proxy_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

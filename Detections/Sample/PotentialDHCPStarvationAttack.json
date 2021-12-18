@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "871c02b2-393e-457e-8686-b912b53c5084",
+      "defaultValue": "94d72012-0846-4f42-9d26-51f9cdb2fa6e",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,37 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "57e56fc9-417a-4f41-a579-5475aea7b8ce",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1200"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "InfobloxNIOS",
+            "dataTypes": [
+              "Syslog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

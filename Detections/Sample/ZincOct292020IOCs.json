@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "c48257b9-ba87-4408-bf0a-2c6d31c0fc8b",
+      "defaultValue": "6587f4a3-260a-470f-a372-fd7d879e9772",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,66 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "3174a9ec-d0ad-4152-8307-94ed04fa450a",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "CommandAndControl",
           "CredentialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "CiscoASA",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

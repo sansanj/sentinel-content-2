@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "3f9f214d-6a92-4a98-88f5-f06036a2d872",
+      "defaultValue": "bc94a765-bab8-4692-9cec-86978582f1b8",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -22,7 +22,7 @@
       "kind": "Scheduled",
       "location": "[resourceGroup().location]",
       "properties": {
-        "description": "This Query creates an incident based on Trend Micro XDR Workbench Alerts and maps the impacted entities for Azure Sentinel usage. (Medium & Low Serverity Alerts)",
+        "description": "This Query creates an incident based on Trend Micro XDR Workbench Alerts and maps the impacted entities for Microsoft Sentinel usage. (Medium & Low Serverity Alerts)",
         "displayName": "Create Incident for XDR Alerts (Medium & Low)",
         "enabled": false,
         "query": "\nlet threshold = 100;\nTrendMicro_XDR_CL        \n| where modelSeverity_s == 'medium' or modelSeverity_s  == 'low'\n| extend AccountCustomEntity = impactScope_account_s, HostCustomEntity = impactScope_hostname_s, IPCustomEntity = impactScope_host_s\n",
@@ -32,7 +32,52 @@
         "suppressionDuration": "PT1H",
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
-        "triggerThreshold": 0
+        "triggerThreshold": 0,
+        "alertRuleTemplateName": "00282588-11e7-436d-90e8-011256c3c691",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
+        "tactics": null,
+        "requiredDataConnectors": [
+          {
+            "connectorId": "TrendMicroXDR",
+            "dataTypes": [
+              "TrendMicro_XDR_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

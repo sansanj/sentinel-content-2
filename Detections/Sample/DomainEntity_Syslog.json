@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "f1ab316c-fba8-4b6d-b5c9-6f30ab1f4bd4",
+      "defaultValue": "75cbd5b7-4158-4e21-8ce3-8197e05caa7f",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies a match in Syslog table from any Domain IOC from TI",
         "displayName": "TI map Domain entity to Syslog",
         "enabled": false,
-        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\n//Create a list of TLDs in our threat feed for later validation\nlet list_tlds = ThreatIntelligenceIndicator\n| where TimeGenerated > ago(ioc_lookBack)\n| where isnotempty(DomainName)\n| extend parts = split(DomainName, '.')\n| extend tld = parts[(array_length(parts)-1)]\n| summarize count() by tostring(tld)\n| summarize make_list(tld);\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| where Active == true\n// Picking up only IOC's that contain the entities we want\n| where isnotempty(DomainName)\n| join (\n    Syslog\n    | where TimeGenerated > ago(dt_lookBack)\n    //Extract domain patterns from syslog message\n    | extend domain = extract(\"(([a-z0-9]+(-[a-z0-9]+)*\\\\.)+[a-z]{2,})\",1, tolower(SyslogMessage))\n    | where isnotempty(domain)\n    | extend parts = split(domain, '.')\n    //Split out the TLD\n    | extend tld = parts[(array_length(parts)-1)]\n    //Validate parsed domain by checking if the TLD is in the list of TLDs in our threat feed\n    | where tld in~ (list_tlds)\n    | extend Syslog_TimeGenerated = TimeGenerated\n) on $left.DomainName==$right.domain\n| where Syslog_TimeGenerated >= TimeGenerated and Syslog_TimeGenerated < ExpirationDateTime\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| project LatestIndicatorTime, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, Syslog_TimeGenerated, SyslogMessage, Computer, ProcessName, domain, HostIP, Url\n| extend timestamp = Syslog_TimeGenerated, HostCustomEntity = Computer, IPCustomEntity = HostIP, URLCustomEntity = Url\n",
+        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\n//Create a list of TLDs in our threat feed for later validation\nlet list_tlds = ThreatIntelligenceIndicator\n| where TimeGenerated > ago(ioc_lookBack)\n| where isnotempty(DomainName)\n| extend parts = split(DomainName, '.')\n| extend tld = parts[(array_length(parts)-1)]\n| summarize count() by tostring(tld)\n| summarize make_list(tld);\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| where Active == true\n// Picking up only IOC's that contain the entities we want\n| where isnotempty(DomainName)\n// using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n| join kind=innerunique (\n    Syslog\n    | where TimeGenerated > ago(dt_lookBack)\n    //Extract domain patterns from syslog message\n    | extend domain = extract(\"(([a-z0-9]+(-[a-z0-9]+)*\\\\.)+[a-z]{2,})\",1, tolower(SyslogMessage))\n    | where isnotempty(domain)\n    | extend parts = split(domain, '.')\n    //Split out the TLD\n    | extend tld = parts[(array_length(parts)-1)]\n    //Validate parsed domain by checking if the TLD is in the list of TLDs in our threat feed\n    | where tld in~ (list_tlds)\n    | extend Syslog_TimeGenerated = TimeGenerated\n) on $left.DomainName==$right.domain\n| where Syslog_TimeGenerated < ExpirationDateTime\n| summarize Syslog_TimeGenerated  = arg_max(Syslog_TimeGenerated , *) by IndicatorId, domain\n| project Syslog_TimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, SyslogMessage, Computer, ProcessName, domain, HostIP, Url\n| extend timestamp = Syslog_TimeGenerated, HostCustomEntity = Computer, IPCustomEntity = HostIP, URLCustomEntity = Url\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "P14D",
         "severity": "Medium",
@@ -33,9 +33,65 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "532f62c1-fba6-4baa-bbb6-4a32a4ef32fa",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "Syslog",
+            "dataTypes": [
+              "Syslog"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

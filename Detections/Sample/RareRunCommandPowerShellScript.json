@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "8a4eced9-6786-4bb0-8eef-bd35c4672e4a",
+      "defaultValue": "e52bd802-3e96-4391-8b7f-c57e58539370",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,64 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "5239248b-abfb-4c6a-8177-b104ade5db56",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "HostName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          }
+        ],
+        "techniques": [
+          "T1570",
+          "T1078.004"
+        ],
         "tactics": [
           "LateralMovement",
           "CredentialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureActivity",
+            "dataTypes": [
+              "AzureActivity"
+            ]
+          },
+          {
+            "connectorId": "MicrosoftThreatProtection",
+            "dataTypes": [
+              "DeviceFileEvents",
+              "DeviceEvents"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

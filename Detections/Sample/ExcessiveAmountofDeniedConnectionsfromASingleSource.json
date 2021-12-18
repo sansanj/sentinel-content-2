@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "d24bf78d-87ba-448a-9d3e-26eea3e0eb5f",
+      "defaultValue": "b42fd648-56d8-405b-8303-ecbf32e7f3be",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,37 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "3d645a88-2724-41a7-adea-db74c439cf79",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1499"
+        ],
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "SophosXGFirewall",
+            "dataTypes": [
+              "Syslog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

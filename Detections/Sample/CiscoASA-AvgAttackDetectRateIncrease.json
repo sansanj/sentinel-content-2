@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "0a6b282a-9017-42b6-b45a-022ac04b0af9",
+      "defaultValue": "4a9a7b49-4e79-4f64-b778-209a63227af1",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,48 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "79f29feb-6a9d-4cdf-baaa-2daf480a5da1",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1046",
+          "T1498"
+        ],
         "tactics": [
           "Discovery",
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "CiscoASA",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

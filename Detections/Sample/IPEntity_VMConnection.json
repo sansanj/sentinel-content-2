@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "a266b426-eba0-40c7-b339-751a38c975e4",
+      "defaultValue": "0a9646c6-c11c-4190-83be-ff0440581ebd",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies a match in VMConnection from any IP IOC from TI",
         "displayName": "TI map IP entity to VMConnection",
         "enabled": false,
-        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| where Active == true\n// Picking up only IOC's that contain the entities we want\n| where isnotempty(NetworkIP) or isnotempty(EmailSourceIpAddress) or isnotempty(NetworkDestinationIP) or isnotempty(NetworkSourceIP)\n// As there is potentially more than 1 indicator type for matching IP, taking NetworkIP first, then others if that is empty.\n// Taking the first non-empty value based on potential IOC match availability\n| extend TI_ipEntity = iff(isnotempty(NetworkIP), NetworkIP, NetworkDestinationIP)\n| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(NetworkSourceIP), NetworkSourceIP, TI_ipEntity)\n| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(EmailSourceIpAddress), EmailSourceIpAddress, TI_ipEntity)\n| join (\n    VMConnection\n    | where TimeGenerated >= ago(dt_lookBack)\n    // renaming time column so it is clear the log this came from\n    | extend VMConnection_TimeGenerated = TimeGenerated\n)\non $left.TI_ipEntity == $right.RemoteIp\n| where VMConnection_TimeGenerated >= TimeGenerated and VMConnection_TimeGenerated < ExpirationDateTime\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| project LatestIndicatorTime, Description, ActivityGroupNames, IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore, VMConnection_TimeGenerated,\nTI_ipEntity, Computer, Direction, ProcessName, SourceIp, DestinationIp, RemoteIp, Protocol, DestinationPort, NetworkIP, NetworkDestinationIP, NetworkSourceIP, EmailSourceIpAddress\n| extend timestamp = VMConnection_TimeGenerated, IPCustomEntity = RemoteIp, HostCustomEntity = Computer, URLCustomEntity = Url\n",
+        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| where Active == true\n// Picking up only IOC's that contain the entities we want\n| where isnotempty(NetworkIP) or isnotempty(EmailSourceIpAddress) or isnotempty(NetworkDestinationIP) or isnotempty(NetworkSourceIP)\n// As there is potentially more than 1 indicator type for matching IP, taking NetworkIP first, then others if that is empty.\n// Taking the first non-empty value based on potential IOC match availability\n| extend TI_ipEntity = iff(isnotempty(NetworkIP), NetworkIP, NetworkDestinationIP)\n| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(NetworkSourceIP), NetworkSourceIP, TI_ipEntity)\n| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(EmailSourceIpAddress), EmailSourceIpAddress, TI_ipEntity)\n// using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n| join kind=innerunique (\n    VMConnection\n    | where TimeGenerated >= ago(dt_lookBack)\n    // renaming time column so it is clear the log this came from\n    | extend VMConnection_TimeGenerated = TimeGenerated\n)\non $left.TI_ipEntity == $right.RemoteIp\n| where VMConnection_TimeGenerated < ExpirationDateTime\n| summarize VMConnection_TimeGenerated = arg_max(VMConnection_TimeGenerated, *) by IndicatorId, RemoteIp\n| project VMConnection_TimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore,\nTI_ipEntity, Computer, Direction, ProcessName, SourceIp, DestinationIp, RemoteIp, Protocol, DestinationPort, NetworkIP, NetworkDestinationIP, NetworkSourceIP, EmailSourceIpAddress\n| extend timestamp = VMConnection_TimeGenerated, IPCustomEntity = RemoteIp, HostCustomEntity = Computer, URLCustomEntity = Url\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "P14D",
         "severity": "Medium",
@@ -33,9 +33,65 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "9713e3c0-1410-468d-b79e-383448434b2d",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMConnection"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

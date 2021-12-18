@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "36dd40b6-a934-4bb0-b11a-7f603d940eb5",
+      "defaultValue": "9578ea47-ee34-4289-9aa2-05630ecf2f1b",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,48 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "23de46ea-c425-4a77-b456-511ae4855d69",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1003",
+          "T1098"
+        ],
         "tactics": [
           "CredentialAccess",
           "Persistence"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureActivity",
+            "dataTypes": [
+              "AzureActivity"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

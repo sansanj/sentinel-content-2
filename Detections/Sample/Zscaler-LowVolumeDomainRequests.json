@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "76e18d87-7f67-4ae6-b194-fe4b94caaa1c",
+      "defaultValue": "63037f09-9e99-49da-909e-f384f84b9738",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,38 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "4d500e6d-c984-43a3-9f39-7edec8dcc04d",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1102",
+          "T1071"
+        ],
         "tactics": [
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "Zscaler",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

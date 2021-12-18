@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "d099d035-0831-4c80-81a5-587304e6e32e",
+      "defaultValue": "c110f9e8-7ac6-496f-8df7-da0c413e767e",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,60 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "a3c144f9-8051-47d4-ac29-ffb0c312c910",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Algorithm",
+                "columnName": "MD5"
+              },
+              {
+                "identifier": "Value",
+                "columnName": "FileHashCustomEntity"
+              }
+            ],
+            "entityType": "FileHash"
+          }
+        ],
+        "techniques": [
+          "T1195.002"
+        ],
         "tactics": [
           "Execution",
           "Persistence"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "MicrosoftThreatProtection",
+            "dataTypes": [
+              "DeviceFileEvents"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

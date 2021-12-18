@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "c62d2a2f-1820-4030-86cc-a6dd2cdb7558",
+      "defaultValue": "beb39f94-ac53-4ab4-b1c2-7b591497b571",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,49 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "bdf04f58-242b-4729-b376-577c4bdf5d3a",
+        "tags": [
+          {
+            "Id": "d82e1987-4356-4a7b-bc5e-064f29b143c0",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMProcessEvent"
+          },
+          "NOBELIUM"
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          }
+        ],
+        "techniques": [
+          "T1547"
+        ],
         "tactics": [
           "Persistence"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "dcf060ea-40a8-4644-a615-e2f9df72a6a5",
+      "defaultValue": "789aca0f-8766-49a2-84b7-1d68e2db7652",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies a match in SecurityAlert table from any Email IOC from TI which will extend coverage to datatypes such as MCAS, StorageThreatProtection and many others",
         "displayName": "TI map Email entity to SecurityAlert",
         "enabled": false,
-        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nlet emailregex = @'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$';\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| where Active == true\n//Filtering the table for Email related IOCs\n| where isnotempty(EmailSenderAddress)\n| join (\n    SecurityAlert | where TimeGenerated >= ago(dt_lookBack)\n    // Converting Entities into dynamic data type and use mv-expand to unpack the array\n    | extend EntitiesDynamicArray = parse_json(Entities) | mv-expand EntitiesDynamicArray\n    // Parsing relevant entity column to filter type account and creating new column by combining account and UPNSuffix\n    | extend Entitytype = tostring(parse_json(EntitiesDynamicArray).Type), EntityName = tostring(parse_json(EntitiesDynamicArray).Name),\n    EntityUPNSuffix = tostring(parse_json(EntitiesDynamicArray).UPNSuffix)\n    | where Entitytype =~ \"account\"\n    | extend EntityEmail = tolower(strcat(EntityName, \"@\", EntityUPNSuffix))\n    | where EntityEmail matches regex emailregex\n    | extend Alert_TimeGenerated = TimeGenerated\n)\non $left.EmailSenderAddress == $right.EntityEmail\n| where Alert_TimeGenerated >= TimeGenerated and Alert_TimeGenerated < ExpirationDateTime\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| project LatestIndicatorTime, Description, ActivityGroupNames, IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore, Alert_TimeGenerated,\nEmailSenderName, EmailRecipient, EmailSourceDomain, EmailSourceIpAddress, EmailSubject, FileHashValue, FileHashType, EntityEmail, AlertName, AlertType,\nAlertSeverity, Entities, ProviderName, VendorName\n| extend timestamp = Alert_TimeGenerated, AccountCustomEntity = EntityEmail, URLCustomEntity = Url\n",
+        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nlet emailregex = @'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$';\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n| summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n| where Active == true\n//Filtering the table for Email related IOCs\n| where isnotempty(EmailSenderAddress)\n// using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n| join kind=innerunique (\n    SecurityAlert \n    | where TimeGenerated >= ago(dt_lookBack)\n    | extend MSTI = case(AlertName has \"TI map\" and VendorName == \"Microsoft\" and ProductName == 'Azure Sentinel', true, false)\n    | where MSTI == false\n    // Converting Entities into dynamic data type and use mv-expand to unpack the array\n    | extend EntitiesDynamicArray = parse_json(Entities) | mv-expand EntitiesDynamicArray\n    // Parsing relevant entity column to filter type account and creating new column by combining account and UPNSuffix\n    | extend Entitytype = tostring(parse_json(EntitiesDynamicArray).Type), EntityName = tostring(parse_json(EntitiesDynamicArray).Name),\n    EntityUPNSuffix = tostring(parse_json(EntitiesDynamicArray).UPNSuffix)\n    | where Entitytype =~ \"account\"\n    | extend EntityEmail = tolower(strcat(EntityName, \"@\", EntityUPNSuffix))\n    | where EntityEmail matches regex emailregex\n    | extend Alert_TimeGenerated = TimeGenerated\n)\non $left.EmailSenderAddress == $right.EntityEmail\n| where Alert_TimeGenerated < ExpirationDateTime\n| summarize Alert_TimeGenerated = arg_max(Alert_TimeGenerated, *) by IndicatorId, AlertName\n| project Alert_TimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, Url, ExpirationDateTime, ConfidenceScore, \nEmailSenderName, EmailRecipient, EmailSourceDomain, EmailSourceIpAddress, EmailSubject, FileHashValue, FileHashType, EntityEmail, AlertName, AlertType,\nAlertSeverity, Entities, ProviderName, VendorName\n| extend timestamp = Alert_TimeGenerated, AccountCustomEntity = EntityEmail, URLCustomEntity = Url\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "P14D",
         "severity": "Medium",
@@ -33,9 +33,56 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "a2e36ce0-da4d-4b6e-88c6-4e40161c5bfc",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureSecurityCenter",
+            "dataTypes": [
+              "SecurityAlert"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

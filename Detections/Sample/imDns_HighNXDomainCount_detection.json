@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "060aabc1-6c8a-4f09-b116-a0b0c6805d7c",
+      "defaultValue": "4059cc8c-74ef-43f9-abed-bb067aa015ae",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,40 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "983a6922-894d-413c-9f04-d7add0ecc307",
+        "tags": [
+          {
+            "Id": "a0907abe-6925-4d90-af2b-c7e89dc201a6",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.1",
+            "Schema": "ASIMDns"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1568",
+          "T1008"
+        ],
         "tactics": [
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

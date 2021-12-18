@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "bb8a251f-4bdd-40b6-b4ef-da8e0c23e7ef",
+      "defaultValue": "ce11fda8-f604-4547-af58-fa313e8a8146",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,145 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "677da133-e487-4108-a150-5b926591a92b",
+        "tags": [
+          "NOBELIUM",
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMFileEvent"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "DomainName",
+                "columnName": "DNSName"
+              }
+            ],
+            "entityType": "DNS"
+          }
+        ],
+        "techniques": [
+          "T1102.002",
+          "T1204.001"
+        ],
         "tactics": [
           "CommandAndControl",
           "Execution"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "DNS",
+            "dataTypes": [
+              "DnsEvents"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMConnection"
+            ]
+          },
+          {
+            "connectorId": "F5",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "CiscoASA",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "Fortinet",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "CheckPoint",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "CEF",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "MicrosoftThreatProtection",
+            "dataTypes": [
+              "DeviceNetworkEvents",
+              "DeviceFileEvents"
+            ]
+          },
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          },
+          {
+            "connectorId": "Office365",
+            "dataTypes": [
+              "OfficeActivity"
+            ]
+          },
+          {
+            "connectorId": "AzureFirewall",
+            "dataTypes": [
+              "AzureDiagnostics"
+            ]
+          },
+          {
+            "connectorId": "WindowsFirewall",
+            "dataTypes": [
+              "WindowsFirewall"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

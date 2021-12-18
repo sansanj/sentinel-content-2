@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "ede5b5d5-fcf0-4d8f-b85c-c8ea9fa74c3b",
+      "defaultValue": "3c0b5afe-4cb8-4ce4-9ecd-a84706d91c1f",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,96 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "ab4b6944-a20d-42ab-8b63-238426525801",
+        "tags": [
+          "Solorigate",
+          "NOBELIUM"
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "HostName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "DomainName",
+                "columnName": "DNSName"
+              }
+            ],
+            "entityType": "DNS"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "ProcessId",
+                "columnName": "FirstPid"
+              },
+              {
+                "identifier": "CommandLine",
+                "columnName": "CommandLine"
+              }
+            ],
+            "entityType": "Process"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Directory",
+                "columnName": "DirectoryName"
+              },
+              {
+                "identifier": "Name",
+                "columnName": "Filename"
+              }
+            ],
+            "entityType": "File"
+          }
+        ],
+        "techniques": [
+          "T1102"
+        ],
         "tactics": [
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMConnection"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMProcess"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMComputer"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

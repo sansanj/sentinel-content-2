@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "55864306-7eb2-483a-aed8-cfeaef88deb0",
+      "defaultValue": "c6b7994e-ae58-499c-bdac-a7035e8858de",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,27 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "21ab3f52-6d79-47e3-97f8-ad65f2cb29fb",
+        "tags": null,
+        "entityMappings": null,
+        "techniques": [
+          "T1558.001"
+        ],
         "tactics": [
           "CredentialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AlsidForAD",
+            "dataTypes": [
+              "AlsidForADLog_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

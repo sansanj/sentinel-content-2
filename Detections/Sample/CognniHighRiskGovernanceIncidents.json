@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "9d069b7f-feae-4802-a58c-5ab9df415bd1",
+      "defaultValue": "4715c9ad-d4c0-4eed-b1a7-fa0a808deff4",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,37 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "2926ce29-08d2-4654-b2e8-7d8df70095d9",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": [
+          "T1530"
+        ],
         "tactics": [
           "Collection"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "CognniSentinelDataConnector",
+            "dataTypes": [
+              "CognniIncidents_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

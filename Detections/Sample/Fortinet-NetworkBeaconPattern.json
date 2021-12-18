@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "2d3254e4-73d7-4aaf-84cb-e130b8a6f608",
+      "defaultValue": "f9862418-b01a-40d9-84e1-bece0e2e89bb",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,38 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "3255ec41-6bd6-4f35-84b1-c032b18bbfcb",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1071",
+          "T1571"
+        ],
         "tactics": [
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "Fortinet",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

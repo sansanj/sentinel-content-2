@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "53b36fdc-467d-4e6b-b665-60a15a0bd408",
+      "defaultValue": "4e52f7d5-cb46-4880-9b3a-279444078bcf",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,48 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "3fe3c520-04f1-44b8-8398-782ed21435f8",
+        "tags": [
+          {
+            "Id": "a83ef0f4-dace-4767-bce3-ebd32599d2a0",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.1",
+            "Schema": "ASIMDns"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1048"
+        ],
         "tactics": [
           "Exfiltration"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

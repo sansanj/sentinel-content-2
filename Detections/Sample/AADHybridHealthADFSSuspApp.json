@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "8677ddf7-01b1-4cb6-90c3-2edebb8cc21b",
+      "defaultValue": "fa3714b9-e6fa-4839-92cf-c7a3329e0edb",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,50 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "d9938c3b-16f9-444d-bc22-ea9a9110e0fd",
+        "tags": [
+          "SimuLand"
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1528",
+          "T1550"
+        ],
         "tactics": [
           "CredentialAccess",
           "DefenseEvasion"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureActivity",
+            "dataTypes": [
+              "AzureActivity"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

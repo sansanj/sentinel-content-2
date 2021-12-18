@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "f9d6a454-9a53-4ff5-b07b-ccf75381d861",
+      "defaultValue": "7ee415a8-0c09-46a1-b75d-9223de562a12",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,83 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "70b12a3b-4896-42cb-910c-5ffaf8d7987d",
+        "tags": [
+          {
+            "SchemaVersion": "0.1.1",
+            "Schema": "ASIMDns"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "CommandAndControl",
           "CredentialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "DNS",
+            "dataTypes": [
+              "DnsEvents"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMConnection"
+            ]
+          },
+          {
+            "connectorId": "CiscoASA",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "AzureFirewall",
+            "dataTypes": [
+              "AzureDiagnostics"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

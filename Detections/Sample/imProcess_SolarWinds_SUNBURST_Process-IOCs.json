@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "86cacbec-0a39-4ca5-9f9c-c1a69d46eb44",
+      "defaultValue": "20412a8c-a3a7-41a5-8620-6d4c724d3092",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,64 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "631d02df-ab51-46c1-8d72-32d0cfec0720",
+        "tags": [
+          {
+            "Id": "4a3073ac-7383-48a9-90a8-eb6716183a54",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMProcessEvent"
+          },
+          "Solorigate",
+          "NOBELIUM"
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Algorithm",
+                "columnName": "MD5"
+              },
+              {
+                "identifier": "Value",
+                "columnName": "FileHashCustomEntity"
+              }
+            ],
+            "entityType": "FileHash"
+          }
+        ],
+        "techniques": [
+          "T1195.002"
+        ],
         "tactics": [
           "Execution",
           "Persistence"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "8be50fc5-8178-44c3-92c4-e0075e892b3d",
+      "defaultValue": "fddce345-91bc-4cba-82f9-af733f7cdc69",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -32,7 +32,34 @@
         "suppressionDuration": "PT1H",
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
-        "triggerThreshold": 0
+        "triggerThreshold": 0,
+        "alertRuleTemplateName": "56b0a0cd-894e-4b38-a0a1-c41d9f96649a",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
+        "tactics": null,
+        "requiredDataConnectors": [
+          {
+            "connectorId": "ProofpointPOD",
+            "dataTypes": [
+              "ProofpointPOD_message_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

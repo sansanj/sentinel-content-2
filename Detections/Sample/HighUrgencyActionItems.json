@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "2eed7529-b803-4d36-a320-a7a4bdd7a0dc",
+      "defaultValue": "af5d8d85-ac5f-4ef7-bf10-7b43986ec91d",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,38 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "8e0403b1-07f8-4865-b2e9-74d1e83200a4",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "DomainName",
+                "columnName": "DNSCustomEntity"
+              }
+            ],
+            "entityType": "DNS"
+          }
+        ],
+        "techniques": [
+          "T1190",
+          "T1195"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "CyberpionSecurityLogs",
+            "dataTypes": [
+              "CyberpionActionItems_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

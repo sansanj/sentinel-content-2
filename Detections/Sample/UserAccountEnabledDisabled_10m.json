@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "7495f724-8eda-4b37-85b2-4eb87ed96ce9",
+      "defaultValue": "9d680f1a-5c96-48c6-8662-3604bfe61eb2",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,18 +25,66 @@
         "description": "Identifies when a user account is enabled and then disabled within 10 minutes. This can be an indication of compromise and\nan adversary attempting to hide in the noise.",
         "displayName": "User account enabled and disabled within 10 mins",
         "enabled": false,
-        "query": "let timeframe = 1d;\nlet spanoftime = 10m;\nlet threshold = 0;\nSecurityEvent \n| where TimeGenerated > ago(2*timeframe) \n// A user account was enabled\n| where EventID == 4722\n| where AccountType =~ \"User\"\n| where TargetAccount !hassuffix \"$\"\n| project EnableTime = TimeGenerated, EnableEventID = EventID, EnableActivity = Activity, Computer, UserPrincipalName, \nAccountUsedToEnable = SubjectAccount, SIDofAccountUsedToEnable = SubjectUserSid, TargetAccount = tolower(TargetAccount), TargetSid\n| join kind= inner (\n  SecurityEvent\n  | where TimeGenerated > ago(timeframe) \n  // A user account was disabled \n  | where EventID == 4725\n| where AccountType =~ \"User\"\n| project DisableTime = TimeGenerated, DisableEventID = EventID, DisableActivity = Activity, Computer, UserPrincipalName, \nAccountUsedToDisable = SubjectAccount, SIDofAccountUsedToDisable = SubjectUserSid, TargetAccount = tolower(TargetAccount), TargetSid\n) on Computer, TargetAccount\n| where DisableTime - EnableTime < spanoftime\n| extend TimeDelta = DisableTime - EnableTime\n| where tolong(TimeDelta) >= threshold\n| project TimeDelta, EnableTime, EnableEventID, EnableActivity, Computer, TargetAccount, TargetSid, UserPrincipalName, AccountUsedToEnable, SIDofAccountUsedToEnable, \nDisableTime, DisableEventID, DisableActivity, AccountUsedToDisable, SIDofAccountUsedToDisable\n| extend timestamp = EnableTime, AccountCustomEntity = AccountUsedToEnable, HostCustomEntity = Computer\n",
+        "query": "let timeframe = 1d;\nlet spanoftime = 10m;\nlet threshold = 0;\nSecurityEvent\n| where TimeGenerated > ago(timeframe+spanoftime)\n// A user account was enabled\n| where EventID == 4722\n| where AccountType =~ \"User\"\n| where TargetAccount !hassuffix \"$\"\n| project EnableTime = TimeGenerated, EnableEventID = EventID, EnableActivity = Activity, Computer, UserPrincipalName, \nAccountUsedToEnable = SubjectAccount, SIDofAccountUsedToEnable = SubjectUserSid, TargetAccount = tolower(TargetAccount), TargetSid\n| join kind= inner (\n  SecurityEvent\n  | where TimeGenerated > ago(timeframe)\n  // A user account was disabled\n  | where EventID == 4725\n| where AccountType =~ \"User\"\n| project DisableTime = TimeGenerated, DisableEventID = EventID, DisableActivity = Activity, Computer, UserPrincipalName, \nAccountUsedToDisable = SubjectAccount, SIDofAccountUsedToDisable = SubjectUserSid, TargetAccount = tolower(TargetAccount), TargetSid\n) on Computer, TargetAccount\n| where DisableTime - EnableTime < spanoftime\n| extend TimeDelta = DisableTime - EnableTime\n| where tolong(TimeDelta) >= threshold\n| project TimeDelta, EnableTime, EnableEventID, EnableActivity, Computer, TargetAccount, TargetSid, UserPrincipalName, AccountUsedToEnable, SIDofAccountUsedToEnable, \nDisableTime, DisableEventID, DisableActivity, AccountUsedToDisable, SIDofAccountUsedToDisable\n| extend timestamp = EnableTime, AccountCustomEntity = AccountUsedToEnable, HostCustomEntity = Computer\n",
         "queryFrequency": "P1D",
-        "queryPeriod": "P2D",
+        "queryPeriod": "PT25H",
         "severity": "Medium",
         "suppressionDuration": "PT1H",
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "3d023f64-8225-41a2-9570-2bd7c2c4535e",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              },
+              {
+                "identifier": "Sid",
+                "columnName": "SIDofAccountUsedToEnable"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          }
+        ],
+        "techniques": [
+          "T1098",
+          "T1078"
+        ],
         "tactics": [
           "Persistence",
           "PrivilegeEscalation"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          },
+          {
+            "connectorId": "WindowsSecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

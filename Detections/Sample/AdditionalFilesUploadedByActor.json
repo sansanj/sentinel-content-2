@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "2c64ac4f-8f5f-44c1-808c-6589cd957f77",
+      "defaultValue": "62e59eb2-2ac3-4a04-b73e-9aaea7a00c90",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,10 +33,53 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "b9e3b9f8-a406-4151-9891-e5ff1ddd8c1d",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Algorithm",
+                "columnName": "HashAlgorithm"
+              },
+              {
+                "identifier": "Value",
+                "columnName": "FileHashCustomEntity"
+              }
+            ],
+            "entityType": "FileHash"
+          }
+        ],
+        "techniques": [
+          "T1584",
+          "T1071",
+          "T1567"
+        ],
         "tactics": [
           "CommandAndControl",
           "Exfiltration"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "MicrosoftCloudAppSecurity",
+            "dataTypes": [
+              "SecurityAlert"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

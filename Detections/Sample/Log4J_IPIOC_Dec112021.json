@@ -1,0 +1,176 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspace": {
+      "type": "String"
+    },
+    "analytic-id": {
+      "type": "string",
+      "defaultValue": "6392295f-31e9-45da-8c14-5554a2b3fb7c",
+      "minLength": 1,
+      "metadata": {
+        "description": "Unique id for the scheduled alert rule"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
+      "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',parameters('analytic-id'))]",
+      "apiVersion": "2020-01-01",
+      "kind": "Scheduled",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "description": "Identifies a match across various data feeds for IP IOCs related to the Log4j vulnerability exploit aka Log4Shell described in CVE-2021-44228.  \n References: https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44228",
+        "displayName": "Log4j vulnerability exploit aka Log4Shell IP IOC",
+        "enabled": false,
+        "query": "\nlet IPList = externaldata(IPAddress:string)[@\"https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Sample%20Data/Feeds/Log4j_IOC_List.csv\"] with (format=\"csv\", ignoreFirstRecord=True);\nlet IPRegex = '[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3}\\\\.[0-9]{1,3}';\n(union isfuzzy=true\n(CommonSecurityLog\n| where SourceIP in (IPList) or DestinationIP in (IPList) or Message has_any (IPList)\n| extend MessageIP = extract(IPRegex, 0, Message)\n| extend IPMatch = case(SourceIP in (IPList), \"SourceIP\", DestinationIP in (IPList), \"DestinationIP\", MessageIP in (IPList), \"Message\", \"No Match\")\n| summarize StartTime = min(TimeGenerated), EndTime = max(TimeGenerated) by SourceIP, DestinationIP, DeviceProduct, DeviceAction, Message, MessageIP, Protocol, SourcePort, DestinationPort, DeviceAddress, DeviceName, IPMatch, LogType = Type \n| extend timestamp = StartTime, IPCustomEntity = case(IPMatch == \"SourceIP\", SourceIP, IPMatch == \"DestinationIP\", DestinationIP, IPMatch == \"Message\", MessageIP, \"No Match\")\n),\n(OfficeActivity \n| extend SourceIPAddress = ClientIP, Account = UserId\n| where  SourceIPAddress in (IPList)\n| extend timestamp = TimeGenerated , IPCustomEntity = SourceIPAddress , AccountCustomEntity = Account, LogType = Type\n),\n(DnsEvents\n| where  IPAddresses has_any (IPList)\n| extend DestinationIPAddress = IPAddresses,  Host = Computer\n| extend timestamp = TimeGenerated, IPCustomEntity = DestinationIPAddress, HostCustomEntity = Host, LogType = Type\n),\n(imDns (response_has_any_prefix=IPList)\n| extend DestinationIPAddress = ResponseName,  Host = SrcIpAddr\n| extend timestamp = TimeGenerated, IPCustomEntity = DestinationIPAddress, HostCustomEntity = Host, LogType = Type\n),\n(imNetworkSession (dstipaddr_has_any_prefix=IPList)\n| extend timestamp = TimeGenerated, IPCustomEntity = DstIpAddr, HostCustomEntity = SrcIpAddr, LogType = Type\n),\n (VMConnection\n| where SourceIp in (IPList) or DestinationIp in (IPList)\n| extend IPMatch = case( SourceIp in (IPList), \"SourceIP\", DestinationIp in (IPList), \"DestinationIP\", \"None\")\n| extend timestamp = TimeGenerated , IPCustomEntity = case(IPMatch == \"SourceIP\", SourceIp, IPMatch == \"DestinationIP\", DestinationIp, \"None\"), Host = Computer, LogType = Type\n),\n(Event\n| where Source == \"Microsoft-Windows-Sysmon\"\n| where EventID == 3\n| extend EvData = parse_xml(EventData)\n| extend EventDetail = EvData.DataItem.EventData.Data\n| extend SourceIP = EventDetail.[9].[\"#text\"], DestinationIP = EventDetail.[14].[\"#text\"]\n| where SourceIP in (IPList) or DestinationIP in (IPList)\n| extend IPMatch = case( SourceIP in (IPList), \"SourceIP\", DestinationIP in (IPList), \"DestinationIP\", \"None\")\n| extend timestamp = TimeGenerated, AccountCustomEntity = UserName, HostCustomEntity = Computer , IPCustomEntity = case(IPMatch == \"SourceIP\", SourceIP, IPMatch == \"DestinationIP\", DestinationIP, \"None\"), LogType = Type\n),\n(WireData\n| where isnotempty(RemoteIP) \n| where RemoteIP in (IPList) \n| extend timestamp = TimeGenerated, IPCustomEntity = RemoteIP, HostCustomEntity = Computer, LogType = Type\n),\n(SigninLogs\n| where isnotempty(IPAddress)\n| where IPAddress in (IPList)\n| extend timestamp = TimeGenerated, AccountCustomEntity = UserPrincipalName, IPCustomEntity = IPAddress, LogType = Type\n),\n(AADNonInteractiveUserSignInLogs\n| where isnotempty(IPAddress)\n| where IPAddress in (IPList)\n| extend timestamp = TimeGenerated, AccountCustomEntity = UserPrincipalName, IPCustomEntity = IPAddress, LogType = Type\n),\n(W3CIISLog\n| where isnotempty(cIP)\n| where cIP in (IPList)\n| extend timestamp = TimeGenerated, IPCustomEntity = cIP, HostCustomEntity = Computer, AccountCustomEntity = csUserName, LogType = Type\n),\n(AzureActivity\n| where isnotempty(CallerIpAddress)\n| where CallerIpAddress in (IPList)\n| extend timestamp = TimeGenerated, IPCustomEntity = CallerIpAddress, AccountCustomEntity = Caller, LogType = Type\n),\n(\nAWSCloudTrail\n| where isnotempty(SourceIpAddress)\n| where SourceIpAddress in (IPList)\n| extend timestamp = TimeGenerated, IPCustomEntity = SourceIpAddress, AccountCustomEntity = UserIdentityUserName, LogType = Type\n), \n( \nDeviceNetworkEvents\n| where isnotempty(RemoteIP)\n| where RemoteIP in (IPList)\n| extend timestamp = TimeGenerated, IPCustomEntity = RemoteIP, HostCustomEntity = DeviceName, LogType = Type\n),\n(\nAzureDiagnostics\n| where ResourceType == \"AZUREFIREWALLS\"\n| where Category == \"AzureFirewallApplicationRule\"\n| parse msg_s with Protocol 'request from ' SourceHost ':' SourcePort 'to ' DestinationHost ':' DestinationPort '. Action:' Action\n| where isnotempty(DestinationHost)\n| where DestinationHost has_any (IPList)\n| extend DestinationIP = DestinationHost\n| extend IPCustomEntity = SourceHost, LogType = Type\n),\n(\nAzureDiagnostics\n| where ResourceType == \"AZUREFIREWALLS\"\n| where Category == \"AzureFirewallNetworkRule\"\n| parse msg_s with Protocol 'request from ' SourceHost ':' SourcePort 'to ' DestinationHost ':' DestinationPort '. Action:' Action\n| where isnotempty(DestinationHost)\n| where DestinationHost has_any (IPList)\n| extend DestinationIP = DestinationHost\n| extend IPCustomEntity = SourceHost, LogType = Type\n),\n(\nDeviceProcessEvents \n| where InitiatingProcessFileName =~ \"java.exe\" and ProcessCommandLine has_all ('curl -s','wget') or\nProcessCommandLine has_all ('curl',@'${jndi') or \nProcessCommandLine has_any (\"${jndi:ldap://\", \"${jndi:rmi:/\", \"${jndi:ldaps:/\", \"${jndi:dns:/\", \"${jndi:iiop://\",\"${jndi:\",'${web:','${jvmrunargs:')\n| extend LogType = Type\n),\n(\nDeviceNetworkEvents\n| where RemoteIP in(IPList) and ActionType != \"ConnectionFailed\"\n| extend LogType = Type\n)\n)\n",
+        "queryFrequency": "P1D",
+        "queryPeriod": "P1D",
+        "severity": "High",
+        "suppressionDuration": "PT1H",
+        "suppressionEnabled": false,
+        "triggerOperator": "GreaterThan",
+        "triggerThreshold": 0,
+        "alertRuleTemplateName": "6e575295-a7e6-464c-8192-3e1d8fd6a990",
+        "tags": [
+          "Log4j",
+          "Log4Shell",
+          "CVE-2021-44228",
+          {
+            "SchemaVersion": "0.1.1",
+            "Schema": "ASIMDns"
+          },
+          {
+            "SchemaVersion": "0.2.0",
+            "Schema": "ASIMNetworkSession"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": null,
+        "tactics": [
+          "CommandAndControl"
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "Office365",
+            "dataTypes": [
+              "OfficeActivity"
+            ]
+          },
+          {
+            "connectorId": "DNS",
+            "dataTypes": [
+              "DnsEvents"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(VMInsights)",
+            "dataTypes": [
+              "VMConnection"
+            ]
+          },
+          {
+            "connectorId": "CiscoASA",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          },
+          {
+            "connectorId": "AzureActiveDirectory",
+            "dataTypes": [
+              "SigninLogs"
+            ]
+          },
+          {
+            "connectorId": "AzureActiveDirectory",
+            "dataTypes": [
+              "AADNonInteractiveUserSignInLogs"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(WireData)",
+            "dataTypes": [
+              "WireData"
+            ]
+          },
+          {
+            "connectorId": "AzureMonitor(IIS)",
+            "dataTypes": [
+              "W3CIISLog"
+            ]
+          },
+          {
+            "connectorId": "AzureActivity",
+            "dataTypes": [
+              "AzureActivity"
+            ]
+          },
+          {
+            "connectorId": "AWS",
+            "dataTypes": [
+              "AWSCloudTrail"
+            ]
+          },
+          {
+            "connectorId": "MicrosoftThreatProtection",
+            "dataTypes": [
+              "DeviceNetworkEvents"
+            ]
+          },
+          {
+            "connectorId": "AzureFirewall",
+            "dataTypes": [
+              "AzureDiagnostics"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
+      }
+    }
+  ]
+}

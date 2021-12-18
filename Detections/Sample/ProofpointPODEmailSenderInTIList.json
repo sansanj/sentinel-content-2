@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "71ac1079-616b-49a2-ac49-3ac3498574a0",
+      "defaultValue": "b8c2e2cc-a646-45f0-ba28-f4bea15dcbb3",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Email sender in TI list.",
         "displayName": "ProofpointPOD - Email sender in TI list",
         "enabled": false,
-        "query": "let ioc_lookBack = 30d;\nlet timeframe = 1h;\nlet TI_email_List =\nThreatIntelligenceIndicator\n| where TimeGenerated > ago(ioc_lookBack)\n| where isnotempty(EmailSenderAddress)\n| summarize make_list(EmailSenderAddress);\nProofpointPOD \n| where TimeGenerated > ago(timeframe)\n| where isnotempty(SrcUserUpn)\n| where SrcUserUpn in~ (TI_email_List)\n| extend Message = \"Email sender in TI list\"\n| project Message, SrcUserUpn, DstUserUpn\n| extend AccountCustomEntity = SrcUserUpn\n",
+        "query": "let dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\nThreatIntelligenceIndicator\n| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now() \n| where Active == true\n| where isnotempty(EmailSenderAddress)\n| extend TI_emailEntity = EmailSenderAddress\n// using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n| join kind=innerunique (\n       ProofpointPOD \n       | where TimeGenerated >= ago(dt_lookBack)\n       | where isnotempty(SrcUserUpn)\n       | extend ProofpointPOD_TimeGenerated = TimeGenerated, ClientEmail = SrcUserUpn\n          \n)\non $left.TI_emailEntity == $right.ClientEmail\n| where ProofpointPOD_TimeGenerated < ExpirationDateTime\n| summarize ProofpointPOD_TimeGenerated = arg_max(ProofpointPOD_TimeGenerated, *) by IndicatorId, ClientEmail\n| project ProofpointPOD_TimeGenerated, Description, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, ClientEmail\n| extend timestamp = ProofpointPOD_TimeGenerated\n",
         "queryFrequency": "P1D",
         "queryPeriod": "P14D",
         "severity": "Medium",
@@ -33,10 +33,48 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "35a0792a-1269-431e-ac93-7ae2980d4dde",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "ClientEmail"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Exfiltration",
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ProofpointPOD",
+            "dataTypes": [
+              "ProofpointPOD_maillog_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

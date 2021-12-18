@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "f2a69283-fb3c-4e74-9e98-c6693d223387",
+      "defaultValue": "534eed88-50e6-4584-a8f0-c245d16537e9",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,27 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "25e0b2dd-3ad3-4d5b-80dd-720f4ef0f12c",
+        "tags": null,
+        "entityMappings": null,
+        "techniques": [
+          "T1207"
+        ],
         "tactics": [
           "DefenseEvasion"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AlsidForAD",
+            "dataTypes": [
+              "AlsidForADLog_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

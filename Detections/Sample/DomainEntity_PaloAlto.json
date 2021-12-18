@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "b48052f2-eca2-4e6f-b659-d4a04f53dea4",
+      "defaultValue": "b52679aa-c825-444f-8dc3-2e679658b552",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies a match in Palo Alto data in CommonSecurityLog table from any Domain IOC from TI",
         "displayName": "TI map Domain entity to PaloAlto",
         "enabled": false,
-        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\n//Create a list of TLDs in our threat feed for later validation of extracted domains\nlet list_tlds = ThreatIntelligenceIndicator\n    | where TimeGenerated > ago(ioc_lookBack)\n    | where isnotempty(DomainName)\n    | extend DomainName = tolower(DomainName)\n    | extend parts = split(DomainName, '.')\n    | extend tld = parts[(array_length(parts)-1)]\n    | summarize count() by tostring(tld)\n    | summarize make_list(tld);\n    ThreatIntelligenceIndicator\n    | where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n    | summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n    | where Active == true\n    // Picking up only IOC's that contain the entities we want\n    | where isnotempty(DomainName)\n    | join (\n        CommonSecurityLog\n        | extend IngestionTime = ingestion_time()\n        | where IngestionTime > ago(dt_lookBack)\n        | where DeviceVendor =~ 'Palo Alto Networks'\n        | where DeviceEventClassID =~ 'url'\n        //Uncomment the line below to only alert on allowed connections\n        //| where DeviceAction !~ \"block-url\"\n        //Extract domain from RequestURL, if not present extarct it from AdditionalExtentions\n        | extend PA_Url = columnifexists(\"RequestURL\", \"None\")\n        | extend PA_Url = iif(isempty(PA_Url) and AdditionalExtensions !startswith \"PanOS\", extract(\"([^\\\"]+)\", 1, tolower(AdditionalExtensions)), trim('\"', PA_Url))\n        | extend PA_Url = iif(PA_Url !startswith \"http://\" and ApplicationProtocol !~ \"ssl\", strcat('http://', PA_Url), iif(PA_Url !startswith \"https://\" and ApplicationProtocol =~ \"ssl\", strcat('https://', PA_Url), PA_Url))\n        | extend Domain = trim(@\"\"\"\",tostring(parse_url(PA_Url).Host))\n        | where isnotempty(Domain)\n        | extend Domain = tolower(Domain)\n        | extend parts = split(Domain, '.')\n        //Split out the TLD for the purpose of checking if we have any TI indicators with this TLD to match on\n        | extend tld = parts[(array_length(parts)-1)]\n        //Validate parsed domain by checking TLD against TLDs from threat feed and drop domains where there is no chance of a match\n        | where tld in~ (list_tlds)\n        | extend CommonSecurityLog_TimeGenerated = TimeGenerated\n    ) on $left.DomainName==$right.Domain\n    | where CommonSecurityLog_TimeGenerated >= TimeGenerated and CommonSecurityLog_TimeGenerated < ExpirationDateTime\n    | project LatestIndicatorTime, Description, ActivityGroupNames, PA_Url, Domain, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, CommonSecurityLog_TimeGenerated, DeviceAction, DestinationIP, DestinationPort, DeviceName, SourceIP, SourcePort, ApplicationProtocol, RequestMethod\n    | extend timestamp = CommonSecurityLog_TimeGenerated, IPCustomEntity = SourceIP, HostCustomEntity = DeviceName, URLCustomEntity = PA_Url\n",
+        "query": "\nlet dt_lookBack = 1h;\nlet ioc_lookBack = 14d;\n//Create a list of TLDs in our threat feed for later validation of extracted domains\nlet list_tlds = ThreatIntelligenceIndicator\n    | where TimeGenerated > ago(ioc_lookBack)\n    | where isnotempty(DomainName)\n    | extend DomainName = tolower(DomainName)\n    | extend parts = split(DomainName, '.')\n    | extend tld = parts[(array_length(parts)-1)]\n    | summarize count() by tostring(tld)\n    | summarize make_list(tld);\n    ThreatIntelligenceIndicator\n    | where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()\n    | summarize LatestIndicatorTime = arg_max(TimeGenerated, *) by IndicatorId\n    | where Active == true\n    // Picking up only IOC's that contain the entities we want\n    | where isnotempty(DomainName)\n    // using innerunique to keep perf fast and result set low, we only need one match to indicate potential malicious activity that needs to be investigated\n    | join kind=innerunique (\n        CommonSecurityLog\n        | extend IngestionTime = ingestion_time()\n        | where IngestionTime > ago(dt_lookBack)\n        | where DeviceVendor =~ 'Palo Alto Networks'\n        | where DeviceEventClassID =~ 'url'\n        //Uncomment the line below to only alert on allowed connections\n        //| where DeviceAction !~ \"block-url\"\n        //Extract domain from RequestURL, if not present extarct it from AdditionalExtentions\n        | extend PA_Url = columnifexists(\"RequestURL\", \"None\")\n        | extend PA_Url = iif(isempty(PA_Url) and AdditionalExtensions !startswith \"PanOS\", extract(\"([^\\\"]+)\", 1, tolower(AdditionalExtensions)), trim('\"', PA_Url))\n        | extend PA_Url = iif(PA_Url !startswith \"http://\" and ApplicationProtocol !~ \"ssl\", strcat('http://', PA_Url), iif(PA_Url !startswith \"https://\" and ApplicationProtocol =~ \"ssl\", strcat('https://', PA_Url), PA_Url))\n        | extend Domain = trim(@\"\"\"\",tostring(parse_url(PA_Url).Host))\n        | where isnotempty(Domain)\n        | extend Domain = tolower(Domain)\n        | extend parts = split(Domain, '.')\n        //Split out the TLD for the purpose of checking if we have any TI indicators with this TLD to match on\n        | extend tld = parts[(array_length(parts)-1)]\n        //Validate parsed domain by checking TLD against TLDs from threat feed and drop domains where there is no chance of a match\n        | where tld in~ (list_tlds)\n        | extend CommonSecurityLog_TimeGenerated = TimeGenerated\n    ) on $left.DomainName==$right.Domain\n    | where CommonSecurityLog_TimeGenerated < ExpirationDateTime\n    | summarize CommonSecurityLog_TimeGenerated = arg_max(CommonSecurityLog_TimeGenerated, *) by IndicatorId, Domain\n    | project CommonSecurityLog_TimeGenerated, Description, ActivityGroupNames, PA_Url, Domain, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, \n    DeviceAction, DestinationIP, DestinationPort, DeviceName, SourceIP, SourcePort, ApplicationProtocol, RequestMethod\n    | extend timestamp = CommonSecurityLog_TimeGenerated, IPCustomEntity = SourceIP, HostCustomEntity = DeviceName, URLCustomEntity = PA_Url\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "P14D",
         "severity": "Medium",
@@ -33,9 +33,65 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "ec21493c-2684-4acd-9bc2-696dbad72426",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "PaloAltoNetworks",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

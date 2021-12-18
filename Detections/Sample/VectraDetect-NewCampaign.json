@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "4c83ce22-1b5f-43c5-8c90-fe8a65b4af46",
+      "defaultValue": "2985b2db-a13a-4ec0-9606-dc6c837a6dd8",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies when a new Campaign has been detected.  This occurs when multiple Detections accross different Hosts are suspected to be part of the same Attack Campaign.",
         "displayName": "Vectra AI Detect - New Campaign Detected",
         "enabled": false,
-        "query": "CommonSecurityLog\n| where DeviceVendor == \"Vectra Networks\"\n| where DeviceProduct == \"X Series\"\n| where DeviceEventClassID contains \"campaign\"\n| where DeviceAction == \"START\"\n| extend reason = extract(\"reason=(.+?)$\", 1, AdditionalExtensions)\n| project-rename vectra_URL = DeviceCustomString4\n| project Activity,SourceHostName, reason, vectra_URL\n",
+        "query": "CommonSecurityLog\n| where DeviceVendor == \"Vectra Networks\"\n| where DeviceProduct == \"X Series\"\n| where DeviceEventClassID contains \"campaign\"\n| where DeviceAction == \"START\"\n| extend reason = extract(\"reason=(.+?)$\", 1, AdditionalExtensions)\n| project-rename vectra_URL = DeviceCustomString4\n| project Activity,SourceHostName, reason, vectra_URL\n| extend HostCustomEntity = SourceHostName, URLCustomEntity = vectra_URL\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "PT1H",
         "severity": "Medium",
@@ -33,10 +33,45 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "a34d0338-eda0-42b5-8b93-32aae0d7a501",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "HostName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "LateralMovement",
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AIVectraDetect",
+            "dataTypes": [
+              "CommonSecurityLog"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

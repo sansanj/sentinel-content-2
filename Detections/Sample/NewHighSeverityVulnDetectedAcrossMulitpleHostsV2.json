@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "5f3d1f4c-c52c-41c7-becc-999db061a9e3",
+      "defaultValue": "f88f852a-b2cb-4e34-b282-36549eb50b2b",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,27 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "6116dc19-475a-4148-84b2-efe89c073e27",
+        "tags": null,
+        "entityMappings": null,
+        "techniques": [
+          "T1190"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "QualysVulnerabilityManagement",
+            "dataTypes": [
+              "QualysHostDetection_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

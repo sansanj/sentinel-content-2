@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "e6f8b24b-c051-44e5-8be3-80e5614ec0ad",
+      "defaultValue": "0ae05016-a937-41c9-92ab-9c347b0ea127",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,46 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "2ca4e7fc-c61a-49e5-9736-5da8035c47e0",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1210"
+        ],
         "tactics": [
           "LateralMovement"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "VMwareCarbonBlack",
+            "dataTypes": [
+              "CarbonBlackNotifications_CL"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

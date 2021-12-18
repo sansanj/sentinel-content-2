@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "9d1ba8bb-8cf2-4bcf-804a-dab677689e35",
+      "defaultValue": "61cf974b-9170-4e7e-9c13-f801cce8b2c2",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,11 +33,50 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 1,
+        "alertRuleTemplateName": "f8dad4e9-3f19-4d70-ab7f-8f19ccd43a3e",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": [
+          "T1046",
+          "T1041",
+          "T1071"
+        ],
         "tactics": [
           "Discovery",
           "LateralMovement",
           "CommandAndControl"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "AzureFirewall",
+            "dataTypes": [
+              "AzureDiagnostics"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

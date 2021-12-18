@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "2e1ffbf8-bc64-4f66-af1d-4c5e259a5b8d",
+      "defaultValue": "a36172b6-4acf-4915-b0c5-ea8be7d05c86",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,39 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "09ec8fa2-b25f-4696-bfae-05a7b85d7b9e",
+        "tags": [
+          {
+            "Id": "2954d424-f786-4677-9ffc-c24c44c6e7d5",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMAuthentication"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          }
+        ],
+        "techniques": [
+          "T1078"
+        ],
         "tactics": [
           "InitialAccess"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

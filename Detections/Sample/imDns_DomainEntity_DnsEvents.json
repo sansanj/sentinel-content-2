@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "2a03054e-7048-4886-9550-23d04c013c49",
+      "defaultValue": "516cc0be-cc97-486b-928e-0e222352ba46",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -33,9 +33,80 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "999e9f5d-db4a-4b07-a206-29c4e667b7e8",
+        "tags": [
+          {
+            "Id": "85aca4d1-5d15-4001-abd9-acb86ca1786a",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.1",
+            "Schema": "ASIMDns"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Url",
+                "columnName": "URLCustomEntity"
+              }
+            ],
+            "entityType": "URL"
+          }
+        ],
+        "techniques": null,
         "tactics": [
           "Impact"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "ThreatIntelligence",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          },
+          {
+            "connectorId": "ThreatIntelligenceTaxii",
+            "dataTypes": [
+              "ThreatIntelligenceIndicator"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": {
+          "QueryType": "QueryType",
+          "IndicatorId": "IndicatorId",
+          "DnsQuery": "DnsQuery",
+          "SourceIPAddress": "SrcIpAddr",
+          "ThreatType": "ThreatType",
+          "DNSRequestTime": "DNS_TimeGenerated",
+          "LatestIndicatorTime": "LatestIndicatorTime",
+          "ExpirationDateTime": "ExpirationDateTime",
+          "Description": "Description",
+          "ConfidenceScore": "ConfidenceScore",
+          "ActivityGroupNames": "ActivityGroupNames"
+        },
+        "alertDetailsOverride": null
       }
     }
   ]

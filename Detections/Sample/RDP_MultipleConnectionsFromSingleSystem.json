@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "8a5f13f9-e572-4931-a2c3-d4cbbeac710c",
+      "defaultValue": "aaa53051-1af4-42d9-a523-c08752580ade",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies when an RDP connection is made to multiple systems and above the normal for the previous 7 days.  \nConnections from the same system with the same account within the same day.\nRDP connections are indicated by the EventID 4624 with LogonType = 10",
         "displayName": "Multiple RDP connections from Single System",
         "enabled": false,
-        "query": "\nlet endtime = 1d;\nlet starttime = 8d;\nlet threshold = 2.0;\nSecurityEvent\n| where TimeGenerated >= ago(endtime) \n| where EventID == 4624 and LogonType == 10\n| summarize StartTimeUtc = min(TimeGenerated), EndTimeUtc = max(TimeGenerated), ComputerCountToday = dcount(Computer), ComputerSet = makeset(Computer), ProcessSet = makeset(ProcessName)  \nby Account, IpAddress, AccountType, Activity, LogonTypeName\n| join kind=inner (\nSecurityEvent\n| where TimeGenerated >= ago(starttime) and TimeGenerated < ago(endtime) \n| where EventID == 4624 and LogonType == 10\n| summarize ComputerCountPrev7Days = dcount(Computer) by Account, IpAddress\n) on Account, IpAddress\n| extend Ratio = ComputerCountToday/(ComputerCountPrev7Days*1.0)\n// Where the ratio of today to previous 7 days is more than double.\n| where Ratio > threshold\n| project StartTimeUtc, EndTimeUtc, Account, IpAddress, ComputerSet, ComputerCountToday, ComputerCountPrev7Days, Ratio, AccountType, Activity, LogonTypeName, ProcessSet\n| extend timestamp = StartTimeUtc, AccountCustomEntity = Account, IPCustomEntity = IpAddress\n",
+        "query": "\nlet endtime = 1d;\nlet starttime = 8d;\nlet threshold = 2.0;\nSecurityEvent\n| where TimeGenerated >= ago(endtime) \n| where EventID == 4624 and LogonType == 10\n| summarize StartTimeUtc = min(TimeGenerated), EndTimeUtc = max(TimeGenerated), ComputerCountToday = dcount(Computer), ComputerSet = makeset(Computer), ProcessSet = makeset(ProcessName)  \nby Account = tolower(Account), IpAddress, AccountType, Activity, LogonTypeName\n| join kind=leftouter (\nSecurityEvent\n| where TimeGenerated >= ago(starttime) and TimeGenerated < ago(endtime) \n| where EventID == 4624 and LogonType == 10\n| summarize ComputerCountPrev7Days = dcount(Computer) by Account = tolower(Account), IpAddress\n) on Account, IpAddress\n| extend Ratio = iff(isempty(ComputerCountPrev7Days), toreal(ComputerCountToday), ComputerCountToday / (ComputerCountPrev7Days * 1.0))\n// Where the ratio of today to previous 7 days is more than double.\n| where Ratio > threshold\n| project StartTimeUtc, EndTimeUtc, Account, IpAddress, ComputerSet, ComputerCountToday, ComputerCountPrev7Days, Ratio, AccountType, Activity, LogonTypeName, ProcessSet\n| extend timestamp = StartTimeUtc, AccountCustomEntity = Account, IPCustomEntity = IpAddress\n",
         "queryFrequency": "P1D",
         "queryPeriod": "P8D",
         "severity": "Low",
@@ -33,9 +33,52 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "78422ef2-62bf-48ca-9bab-72c69818a425",
+        "tags": null,
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Address",
+                "columnName": "IPCustomEntity"
+              }
+            ],
+            "entityType": "IP"
+          }
+        ],
+        "techniques": [
+          "T1076"
+        ],
         "tactics": [
           "LateralMovement"
-        ]
+        ],
+        "requiredDataConnectors": [
+          {
+            "connectorId": "SecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          },
+          {
+            "connectorId": "WindowsSecurityEvents",
+            "dataTypes": [
+              "SecurityEvent"
+            ]
+          }
+        ],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

@@ -7,7 +7,7 @@
     },
     "analytic-id": {
       "type": "string",
-      "defaultValue": "9e36d2cb-977f-45d7-884c-caed111947af",
+      "defaultValue": "2f33cb73-78b6-4886-8434-f319deea8d62",
       "minLength": 1,
       "metadata": {
         "description": "Unique id for the scheduled alert rule"
@@ -25,7 +25,7 @@
         "description": "Identifies the host and account that executed AdFind by hash and filename in addition to common and unique flags that are used by many threat actors in discovery.\nTo use this analytics rule, make sure you have deployed the [ASIM normalization parsers](https://aka.ms/AzSentinelProcessEvent)",
         "displayName": "Probable AdFind Recon Tool Usage (Normalized Process Events)",
         "enabled": false,
-        "query": "let args = dynamic([\"objectcategory\",\"domainlist\",\"dcmodes\",\"adinfo\",\"trustdmp\",\"computers_pwdnotreqd\",\"Domain Admins\", \"objectcategory=person\", \"objectcategory=computer\", \"objectcategory=*\",\"dclist\"]);\nlet parentProcesses = dynamic([\"pwsh.exe\",\"powershell.exe\",\"cmd.exe\"]);\nimProcessCreate\n//looks for execution from a shell\n| where ActingProcessName has_any (parentProcesses)\n| extend ActingProcessFileName = tostring(split(ActingProcessName, '\\\\')[-1])\n| where ActingProcessFileName in~ (parentProcesses)\n// main filter\n| where Process hassuffix \"AdFind.exe\" or TargetProcessSHA256 == \"c92c158d7c37fea795114fa6491fe5f145ad2f8c08776b18ae79db811e8e36a3\"\n    // AdFind common Flags to check for from various threat actor TTPs\n    or CommandLine has_any (args)\n| extend AccountCustomEntity = User, HostCustomEntity = Dvc, ProcessCustomEntity = ActingProcessName, FileHashCustomEntity = TargetProcessSHA256\n",
+        "query": "let args = dynamic([\"objectcategory\",\"domainlist\",\"dcmodes\",\"adinfo\",\"trustdmp\",\"computers_pwdnotreqd\",\"Domain Admins\", \"objectcategory=person\", \"objectcategory=computer\", \"objectcategory=*\",\"dclist\"]);\nlet parentProcesses = dynamic([\"pwsh.exe\",\"powershell.exe\",\"cmd.exe\"]);\nimProcessCreate\n//looks for execution from a shell\n| where ActingProcessName has_any (parentProcesses)\n| extend ActingProcessFileName = tostring(split(ActingProcessName, '\\\\')[-1])\n| where ActingProcessFileName in~ (parentProcesses)\n// main filter\n| where Process hassuffix \"AdFind.exe\" or TargetProcessSHA256 == \"c92c158d7c37fea795114fa6491fe5f145ad2f8c08776b18ae79db811e8e36a3\"\n    // AdFind common Flags to check for from various threat actor TTPs\n    or CommandLine has_any (args)\n| extend AccountCustomEntity = User, HostCustomEntity = Dvc, ProcessCustomEntity = ActingProcessName, CommandLineCustomEntity = CommandLine, AlgorithmCustomEntity = \"SHA256\", FileHashCustomEntity = TargetProcessSHA256\n",
         "queryFrequency": "PT1H",
         "queryPeriod": "PT1H",
         "severity": "High",
@@ -33,9 +33,74 @@
         "suppressionEnabled": false,
         "triggerOperator": "GreaterThan",
         "triggerThreshold": 0,
+        "alertRuleTemplateName": "45076281-35ae-45e0-b443-c32aa0baf965",
+        "tags": [
+          {
+            "Id": "c63ae777-d5e0-4113-8c9a-c2c9d3d09fcd",
+            "version": "1.0.0"
+          },
+          {
+            "SchemaVersion": "0.1.0",
+            "Schema": "ASIMProcessEvent"
+          }
+        ],
+        "entityMappings": [
+          {
+            "fieldMappings": [
+              {
+                "identifier": "FullName",
+                "columnName": "AccountCustomEntity"
+              }
+            ],
+            "entityType": "Account"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "HostName",
+                "columnName": "HostCustomEntity"
+              }
+            ],
+            "entityType": "Host"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "ProcessId",
+                "columnName": "ProcessCustomEntity"
+              },
+              {
+                "identifier": "CommandLine",
+                "columnName": "CommandLineCustomEntity"
+              }
+            ],
+            "entityType": "Process"
+          },
+          {
+            "fieldMappings": [
+              {
+                "identifier": "Algorithm",
+                "columnName": "AlgorithmCustomEntity"
+              },
+              {
+                "identifier": "Value",
+                "columnName": "FileHashCustomEntity"
+              }
+            ],
+            "entityType": "FileHash"
+          }
+        ],
+        "techniques": [
+          "T1018"
+        ],
         "tactics": [
           "Discovery"
-        ]
+        ],
+        "requiredDataConnectors": [],
+        "incidentConfiguration": null,
+        "eventGroupingSettings": null,
+        "customDetails": null,
+        "alertDetailsOverride": null
       }
     }
   ]

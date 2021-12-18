@@ -49,10 +49,33 @@ function ConvertAnalyticsRuleFromYamlToArm {
     $baseMainTemplate = ConvertFrom-Json $basicJson
 
     $ruleId = New-Guid
-    $yamlPropertiesToCopyFrom = "name", "severity", "triggerThreshold", "query"
-    $yamlPropertiesToCopyTo = "displayName", "severity", "triggerThreshold", "query"
+
+    $yamlPropertiesToCopyFrom = "name", "severity", "triggerThreshold", "query", "id", "requiredDataConnectors", "relevantTechniques", "tactics", "tags", "entityMappings", "incidentConfiguration", "eventGroupingSettings", "customDetails", "alertDetailsOverride"
+    $yamlPropertiesToCopyTo = "displayName", "severity", "triggerThreshold", "query", "alertRuleTemplateName", "requiredDataConnectors", "techniques", "tactics", "tags", "entityMappings", "incidentConfiguration", "eventGroupingSettings", "customDetails", "alertDetailsOverride"
     $alertRuleParameterName = "analytic-id"
-    $alertRule = [PSCustomObject] @{ description = ""; displayName = ""; enabled = $false; query = ""; queryFrequency = ""; queryPeriod = ""; severity = ""; suppressionDuration = ""; suppressionEnabled = $false; triggerOperator = ""; triggerThreshold = 0; }
+    $alertRule = [PSCustomObject] @{ 
+            description = "";
+            displayName = "";
+            enabled = $false;
+            query = ""; 
+            queryFrequency = ""; 
+            queryPeriod = ""; 
+            severity = ""; 
+            suppressionDuration = ""; 
+            suppressionEnabled = $false; 
+            triggerOperator = ""; 
+            triggerThreshold = 0;
+            alertRuleTemplateName = ""; 
+            tags = @();
+            entityMappings = @();
+            techniques = @();
+            tactics = @();
+            requiredDataConnectors = $null;
+            incidentConfiguration = $null;
+            eventGroupingSettings = $null;
+            customDetails = $null;
+            alertDetailsOverride = $null;
+            }
     $alertRuleParameter = [PSCustomObject] @{ type = "string"; defaultValue = "$ruleId"; minLength = 1; metadata = [PSCustomObject] @{ description = "Unique id for the scheduled alert rule" }; }
 
     # Copy all directly transposable properties
@@ -63,16 +86,21 @@ function ConvertAnalyticsRuleFromYamlToArm {
     if (!$yaml.severity) {
         $alertRule.severity = "Medium"
     }
-                                                        
+
+    if ($yaml.incidentConfiguration.groupingConfiguration.lookbackDuration)
+    {
+        $alertRule.incidentConfiguration.groupingConfiguration.lookbackDuration = $(checkISO8601Format $yaml.incidentConfiguration.groupingConfiguration.lookbackDuration.TOUpper());
+    }
+    
+    if ($yaml.incidentConfiguration.groupingConfiguration)
+    {
+        $alertRule.incidentConfiguration.groupingConfiguration.entitiesMatchingMethod = "ALL";
+    }
+
     # Content Modifications
     $triggerOperators = [PSCustomObject] @{ gt = "GreaterThan" ; lt = "LessThan" ; eq = "Equal" ; ne = "NotEqual" }
     $alertRule.triggerOperator = $triggerOperators.$($yaml.triggerOperator)
-    if ($yaml.tactics -and ($yaml.tactics.Count -gt 0) ) {
-        if ($yaml.tactics -match ' ') {
-            $yaml.tactics = $yaml.tactics -replace ' ', ''
-        }
-        $alertRule | Add-Member -NotePropertyName tactics -NotePropertyValue $yaml.tactics # Add Tactics property if exists
-    }
+
     $alertRule.description = $yaml.description.TrimEnd() #remove newlines at the end of the string if there are any.
     if ($alertRule.description.StartsWith("'") -or $alertRule.description.StartsWith('"')) {
         # Remove surrounding single-quotes (') from YAML block literal string, in case the string starts with a single quote in Yaml.
@@ -100,6 +128,6 @@ function ConvertAnalyticsRuleFromYamlToArm {
     $baseMainTemplate.resources += $newAnalyticRule
     $baseMainTemplate.parameters | Add-Member -MemberType NoteProperty -Name $alertRuleParameterName -Value $alertRuleParameter
          
-
+    #ConvertTo-Json $baseMainTemplate  | Set-Content -Path $outputFilePath
     ConvertTo-Json $baseMainTemplate -EscapeHandling Default -Depth $jsonConversionDepth  | Set-Content -Path $outputFilePath
 }
