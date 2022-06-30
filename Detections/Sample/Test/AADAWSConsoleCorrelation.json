@@ -10,7 +10,7 @@
       "defaultValue": "835a2032-8b67-4e89-a5c6-2d3c04526a70",
       "minLength": 1,
       "metadata": {
-        "description": "Unique id for the scheduled alert rule test 6/30/2022"
+        "description": "Unique id for the scheduled alert rule test 6/30/2022-1"
       }
     }
   },
