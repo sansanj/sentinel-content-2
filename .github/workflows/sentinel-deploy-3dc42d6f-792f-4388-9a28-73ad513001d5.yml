@@ -13,7 +13,7 @@ on:
   push:
     branches: [ main ]
     paths:
-    - '**'
+    - 'Detections/Sample/Test/**'
     - '!.github/workflows/**'  # this filter prevents other workflow changes from triggering this workflow
     - '.github/workflows/sentinel-deploy-3dc42d6f-792f-4388-9a28-73ad513001d5.yml'
 
@@ -24,7 +24,7 @@ jobs:
       resourceGroupName: 'cac-test-rg'
       workspaceName: 'vidhi-CICD'
       workspaceId: '6d46f6c8-a6f2-4306-9117-65b9383b2b4a'
-      directory: '${{ github.workspace }}'
+      directory: '${{ github.workspace }}/Detections/Sample/Test'
       cloudEnv: 'AzureCloud'
       creds: ${{ secrets.AZURE_SENTINEL_CREDENTIALS_3dc42d6f792f43889a2873ad513001d5 }}
       contentTypes: 'AnalyticsRule'
