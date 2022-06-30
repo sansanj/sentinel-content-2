@@ -13,7 +13,8 @@ on:
   push:
     branches: [ main ]
     paths:
-    - '**'
+# - '**'
+    - 'Detections/Sample/Test/**'
     - '!.github/workflows/**'  # this filter prevents other workflow changes from triggering this workflow
     - '.github/workflows/sentinel-deploy-b870913f-7a04-48e5-9f36-5cbaa1ef01ad.yml'
 
@@ -24,7 +25,7 @@ jobs:
       resourceGroupName: 'sentinel-eco-test-nazang'
       workspaceName: 'sentinel-eco-test-nazang'
       workspaceId: '40d1b346-fe1b-4503-8f8e-cfbbf4d7f4b3'
-      directory: '${{ github.workspace }}'
+      directory: '${{ github.workspace }}/Detections/Sample/Test/'
       cloudEnv: 'AzureCloud'
       creds: ${{ secrets.AZURE_SENTINEL_CREDENTIALS_b870913f7a0448e59f365cbaa1ef01ad }}
       contentTypes: 'AnalyticsRule'
