@@ -24,7 +24,7 @@ jobs:
       resourceGroupName: 'newecotestrg2'
       workspaceName: 'cicd-test-la'
       workspaceId: '2bd62623-2eae-4465-87dc-2883db4db1dc'
-      directory: '${{ github.workspace }}'
+      directory: '${{ github.workspace }}/Detections/Sample'
       cloudEnv: 'AzurePPE'
       creds: ${{ secrets.AZURE_SENTINEL_CREDENTIALS_d567cb79e1424b9d830afc87aa93fc0f }}
       contentTypes: 'AnalyticsRule'
